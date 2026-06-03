@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ASIGNATURAS</h1>
+    {{#subjects}}
+    <p>Nombre: {{name}} </p>
+    <a href="/subject/{{id}}">Ver más</a>
+    {{/subjects}}
+    <br>
+
+    {{^subjects}}
+    <p>No hay asignaturas aún</p>
+    {{/subjects}}
+    <br>
+    <a href="/subject/new">Añadir asignatura</a>
+
+    <a href="/user/new">Añadir usuario</a>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>PROFESORES</h2>
+    {{#getTeachers}}
+    <li>{{name}}</li>
+    {{/getTeachers}}
+    <!--opcion de añadir teacher con un desplegable de los teachers-->
+
+    <h2>ALUMNOS</h2>
+    {{#getStudents}}
+    <li>{{name}}</li>
+    {{/getStudents}}
+</body>
+</html>
