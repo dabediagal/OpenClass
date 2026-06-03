@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Nuevo Usuario</h1>
+
+    <form action="/subject/{{subject.id}}/user/new" method="post">
+        <fieldset>
+            <p>
+                <label for="name">Nombre:</label>
+                <input type="text" name="name">
+            </p>
+            <p>
+                <label for="type">Tipo:</label><br>
+                <input type="radio" id="teacher" name="type" value="teacher">
+                <label for="">Profesor</label><br>
+                <input type="radio" id="student" name="type" value="student">
+                <label for="">Alumno</label>
+            </p>
+            <p>
+                <input type="submit" value="Crear">
+                <a href="/">Volver</a>
+            </p>
+        </fieldset>
+    </form>
+    
+</body>
+</html>
