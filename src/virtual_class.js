@@ -19,7 +19,7 @@ export class VirtualClass {
 	}
 
     static getAllSubjects(){
-        return Array.from(VirtualClass.subjects.values);
+        return Array.from(VirtualClass.subjects.values());
     }
 
 	static deleteUser(id) {
