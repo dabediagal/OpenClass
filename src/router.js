@@ -21,3 +21,10 @@ router.get('/user/new', (req, res) => {
 
     res.redirect('/user/new');
 });
+
+router.get('/subject/new', (req, res) => {
+    const subject = new Subject(req.body.name);
+	VirtualClass.addSubject(subject.id, subject);
+    res.redirect('/subject/new');
+});
+
