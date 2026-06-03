@@ -27,4 +27,3 @@ router.post('/subject/new', (req, res) => {
 	VirtualClass.addSubject(subject.id, subject);
     res.redirect('/new_subject.html');
 });
-
