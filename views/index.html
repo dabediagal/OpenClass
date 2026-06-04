@@ -8,8 +8,9 @@
 <body>
     <h1>ASIGNATURAS</h1>
     {{#subjects}}
-    <p>Nombre: {{name}} </p>
+    <p><b>Nombre:</b> {{name}} </p>
     <a href="/subject/{{id}}">Ver más</a>
+    <a href="/subject/{{id}}/delete">Eliminar</a>
     {{/subjects}}
     <br>
 

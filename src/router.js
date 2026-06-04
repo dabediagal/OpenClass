@@ -11,11 +11,13 @@ const router = express.Router();
 
 export default router;
 
+// Página principal
 router.get('/', (req, res) => {
 	const subjects = VirtualClass.getAllSubjects();
 	res.render('index', { subjects: subjects });
 });
 
+// Crear nuevo usuario
 router.post('/user/new', (req, res) => {
 	const user = new User(req.body.name, req.body.type);
 	VirtualClass.addUser(user);
@@ -23,12 +25,14 @@ router.post('/user/new', (req, res) => {
 	res.redirect('/new_user.html');
 });
 
+// Crear nueva asignatura
 router.post('/subject/new', (req, res) => {
 	const subject = new Subject(req.body.name);
 	VirtualClass.addSubject(subject);
 	res.redirect('/new_subject.html');
 });
 
+// Mostrar una asignatura
 router.get('/subject/:id', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.id);
 	// los teachers y students de una asignatura en concreto
@@ -41,6 +45,7 @@ router.get('/subject/:id', (req, res) => {
 	res.render('show_subject', { subject, teachers, students, nonTeachers, nonStudents });
 });
 
+// Todos los usuarios
 router.get('/users', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
@@ -48,9 +53,24 @@ router.get('/users', (req, res) => {
 	res.render('show_users', { students: students, teachers: teachers });
 });
 
+// Asociar usuario a una asignatura
 router.post('/subject/:id/linkUser', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.id);
 	subject.addUser(req.body.user);
 
 	res.redirect(`/subject/${req.params.id}`);
+});
+
+// Eliminar usuario
+router.get('/user/:id/delete', (req, res) => {
+	VirtualClass.deleteUser(req.params.id);
+
+	res.redirect('/users');
+});
+
+// Eliminar asignatura
+router.get('/subject/:id/delete', (req, res) => {
+	VirtualClass.deleteSubject(req.params.id);
+
+	res.redirect('/');
 });

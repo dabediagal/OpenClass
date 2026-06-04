@@ -12,7 +12,7 @@
         {{#teachers}}
             <p>
                 <b>Id:</b> {{id}} <br>
-                <b>Nombre:</b> {{name}}
+                <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
             </p>
         {{/teachers}}
         {{^teachers}}
@@ -24,7 +24,7 @@
         {{#students}}
             <p>
                 <b>Id:</b> {{id}} <br>
-                <b>Nombre:</b> {{name}}
+                <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
             </p>
         {{/students}}
         {{^students}}
