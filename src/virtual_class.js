@@ -3,7 +3,6 @@ export class VirtualClass {
 	static users = new Map();
 
 	static addUser(user) {
-		console.log('user:', user);
 		VirtualClass.users.set(user.id, user);
 	}
 
