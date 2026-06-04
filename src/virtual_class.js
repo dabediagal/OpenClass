@@ -23,31 +23,11 @@ export class VirtualClass {
 	}
 
 	static getAllTeachers() {
-		let allTeachers = [];
-	
-		for (let i = 0; i < VirtualClass.users.size; i++) {
-			let id = String(i + 1);
-			let user = VirtualClass.users.get(id);
-			
-			if (user.type === 'teacher') {
-				allTeachers.push(user);
-			}
-		}
-		return allTeachers;
+		return Array.from(VirtualClass.users.values()).filter((user) => user.type === 'teacher');
 	}
 
 	static getAllStudents() {
-		let allStudents = [];
-
-		for (let i = 0; i < VirtualClass.users.size; i++) {
-			let id = String(i + 1);
-			let user = VirtualClass.users.get(id);
-
-			if (user.type === 'student') {
-				allStudents.push(user);
-			}
-		}
-		return allStudents;
+		return Array.from(VirtualClass.users.values()).filter(user => user.type === 'student');
 	}
 
 	static deleteUser(id) {
