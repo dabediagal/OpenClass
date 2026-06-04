@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 router.post('/user/new', (req, res) => {
 	const user = new User(req.body.name, req.body.type);
-	VirtualClass.addUser(user.id, user);
+	VirtualClass.addUser(user);
 
 	res.redirect('/new_user.html');
 });
@@ -34,4 +34,11 @@ router.get('/subject/:id', (req, res) => {
 	const students = subject.getStudents();
 
 	res.render('show_subject', { subject, teachers, students });
+});
+
+router.get('/users', (req, res) => {
+	const students = VirtualClass.getAllStudents();
+	const teachers = VirtualClass.getAllTeachers();
+
+	res.render('show_users', { students: students, teachers: teachers });
 });

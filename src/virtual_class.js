@@ -3,6 +3,7 @@ export class VirtualClass {
 	static users = new Map();
 
 	static addUser(user) {
+		console.log('user:', user);
 		VirtualClass.users.set(user.id, user);
 	}
 
@@ -18,9 +19,37 @@ export class VirtualClass {
 		return VirtualClass.subjects.get(id);
 	}
 
-    static getAllSubjects(){
-        return Array.from(VirtualClass.subjects.values());
-    }
+	static getAllSubjects() {
+		return Array.from(VirtualClass.subjects.values());
+	}
+
+	static getAllTeachers() {
+		let allTeachers = [];
+	
+		for (let i = 0; i < VirtualClass.users.size; i++) {
+			let id = String(i + 1);
+			let user = VirtualClass.users.get(id);
+			
+			if (user.type === 'teacher') {
+				allTeachers.push(user);
+			}
+		}
+		return allTeachers;
+	}
+
+	static getAllStudents() {
+		let allStudents = [];
+
+		for (let i = 0; i < VirtualClass.users.size; i++) {
+			let id = String(i + 1);
+			let user = VirtualClass.users.get(id);
+
+			if (user.type === 'student') {
+				allStudents.push(user);
+			}
+		}
+		return allStudents;
+	}
 
 	static deleteUser(id) {
 		VirtualClass.users.delete(id);

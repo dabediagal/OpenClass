@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Usuarios</h1>
+    <div>
+        <h2>Profesores</h2>
+        {{#teachers}}
+            <p>
+                <b>Id:</b> {{id}} <br>
+                <b>Nombre:</b> {{name}}
+            </p>
+        {{/teachers}}
+        {{^teachers}}
+            <p>Aún no hay profes</p>
+        {{/teachers}}
+    </div>
+    <div>
+        <h2>Alumnos</h2>
+        {{#students}}
+            <p>
+                <b>Id:</b> {{id}} <br>
+                <b>Nombre:</b> {{name}}
+            </p>
+        {{/students}}
+        {{^students}}
+            <p>Aún no hay alumnos</p>
+        {{/students}}
+    </div>
+    <a href="/new_user.html">Añadir usuarios</a>
+</body>
+</html>
