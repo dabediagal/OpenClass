@@ -18,7 +18,7 @@
     <li>{{name}}</li>
     {{/students}}
 
-    <form action="/subject/{{subject.id}}/linkTeacher">
+    <form action="/subject/{{subject.id}}/linkTeacher" method="post">
         <fieldset>
             <legend>Profesor</legend>
             <label for="teacher">Añade un Profesor:</label>
@@ -31,7 +31,7 @@
         </fieldset>
     </form>
 
-    <form action="/subject/{{subject.id}}/linkStudent">
+    <form action="/subject/{{subject.id}}/linkStudent" method="post">
         <fieldset>
             <legend>Alumno</legend>
             <label for="student">Añade un Alumno:</label>

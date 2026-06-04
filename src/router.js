@@ -79,5 +79,12 @@ router.get('/users', (req, res) => {
 router.post('/subject/:id/linkTeacher', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.id);
 	subject.addUser(req.body.teacher);
-	res.redirect('/show_subject.html');
+	res.redirect(`/subject/${req.params.id}`);
+});
+
+router.post('/subject/:id/linkStudent', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.id);
+	subject.addUser(req.body.student); 
+
+	res.redirect(`/subject/${req.params.id}`);
 });
