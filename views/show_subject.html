@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>{{subject.name}}</h1>
     <h2>PROFESORES</h2>
     {{#teachers}}
     <li>{{name}}</li>
@@ -16,5 +17,32 @@
     {{#students}}
     <li>{{name}}</li>
     {{/students}}
+
+    <form action="/subject/{{id}}/linkTeacher">
+        <fieldset>
+            <legend>Profesor</legend>
+            <label for="teacher">Añade un Profesor:</label>
+            <select name="teacher">
+                {{#nonTeachers}}
+                <option value="{{id}}">{{name}}</option>
+                {{/nonTeachers}}
+            </select>
+            <input type="submit" value="Añadir">
+        </fieldset>
+    </form>
+
+    <form action="/subject/{{id}}/linkStudent">
+        <fieldset>
+            <legend>Alumno</legend>
+            <label for="student">Añade un Alumno:</label>
+            <select name="student">
+                {{#nonStudents}}
+                <option value="{{id}}">{{name}}</option>
+                {{/nonStudents}}
+            </select>
+            <input type="submit" value="Añadir">
+        </fieldset>
+    </form>
+    
 </body>
 </html>

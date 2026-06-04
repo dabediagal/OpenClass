@@ -34,5 +34,19 @@ export class Subject {
 		}
 	}
 
+	getNonTeachers() {
+		let allTeachers = VirtualClass.getAllTeachers();
+		let teachers = this.getTeachers();
+		let nonTeachers = allTeachers.filter((x) => !teachers.some((y) => y.id === x.id));
+		return nonTeachers;
+	}
+
+	getNonStudents() {
+		let allStudents = VirtualClass.getAllStudents();
+		let students = this.getStudents();
+		let nonStudents = allStudents.filter((x) => !students.some((y) => y.id === x.id));
+		return nonStudents;
+	}
+
 	//deleteUser
 }

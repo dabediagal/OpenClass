@@ -30,10 +30,14 @@ router.post('/subject/new', (req, res) => {
 
 router.get('/subject/:id', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.id);
+	// los teachers y students de una asignatura en concreto
 	const teachers = subject.getTeachers();
 	const students = subject.getStudents();
+	// todos los teachers y students que NO pertenecen a esa asignatura
+	const nonTeachers = subject.getNonTeachers();
+	const nonStudents = subject.getNonStudents();
 
-	res.render('show_subject', { subject, teachers, students });
+	res.render('show_subject', { subject, teachers, students, nonTeachers, nonStudents });
 });
 
 router.get('/users', (req, res) => {
@@ -41,4 +45,10 @@ router.get('/users', (req, res) => {
 	const teachers = VirtualClass.getAllTeachers();
 
 	res.render('show_users', { students: students, teachers: teachers });
+});
+
+router.post('/subject/:id/linkTeacher', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.id);
+	subject.addUser(req.body.teacher);
+	res.redirect('/show_subject.html');
 });
