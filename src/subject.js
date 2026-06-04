@@ -4,7 +4,7 @@ export class Subject {
 	static counter = 0;
 	constructor(name) {
 		Subject.counter++;
-		this.id = Subject.counter;
+		this.id = String(Subject.counter);
 		this.name = name;
 		this.teachers = []; //RECIBE IDS SÓLO
 		this.students = [];
