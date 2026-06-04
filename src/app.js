@@ -1,7 +1,7 @@
 import express from 'express';
 import mustacheExpress from 'mustache-express';
 import bodyParser from 'body-parser';
-
+import { initVirtualClass } from './init.js';
 import router from './router.js';
 
 const app = express();
@@ -15,6 +15,8 @@ app.engine('html', mustacheExpress(), '.html');
 app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+initVirtualClass();
 
 app.use('/', router);
 
