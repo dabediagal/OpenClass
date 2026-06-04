@@ -18,6 +18,7 @@
     <li>{{name}}</li>
     {{/students}}
 
+    {{#nonTeachers.length}}
     <form action="/subject/{{subject.id}}/linkTeacher" method="post">
         <fieldset>
             <legend>Profesor</legend>
@@ -30,7 +31,16 @@
             <input type="submit" value="Añadir">
         </fieldset>
     </form>
+    {{/nonTeachers.length}}
+    
+    {{^nonTeachers.length}}
+    <fieldset>
+        <legend>Profesor</legend>
+        <p><i>No hay más profesores disponibles para añadir.</i></p>
+    </fieldset>
+    {{/nonTeachers.length}}
 
+    {{#nonStudents.length}}
     <form action="/subject/{{subject.id}}/linkStudent" method="post">
         <fieldset>
             <legend>Alumno</legend>
@@ -43,6 +53,15 @@
             <input type="submit" value="Añadir">
         </fieldset>
     </form>
+    {{/nonStudents.length}}
+
+    {{^nonStudents.length}}
+    <fieldset>
+        <legend>Alumno</legend>
+        <p><i>No hay más alumnos disponibles para añadir.</i></p>
+    </fieldset>
+    {{/nonStudents.length}}
+
     <a href="/">Volver</a>
     
 </body>
