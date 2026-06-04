@@ -21,10 +21,10 @@
     {{/teachers}}
 
     {{#nonTeachers.length}}
-        <form action="/subject/{{subject.id}}/linkTeacher" method="post">
+        <form action="/subject/{{subject.id}}/linkUser" method="post">
             <fieldset>
                 <legend>Añade un Profesor:</legend>
-                <select name="teacher">
+                <select name="user">
                     {{#nonTeachers}}
                         <option value="{{id}}">{{name}}</option>
                     {{/nonTeachers}}
@@ -56,10 +56,10 @@
     {{/students}}
 
     {{#nonStudents.length}}
-        <form action="/subject/{{subject.id}}/linkStudent" method="post">
+        <form action="/subject/{{subject.id}}/linkUser" method="post">
             <fieldset>
                 <legend>Añade un Alumno:</legend>
-                <select name="student">
+                <select name="user">
                     {{#nonStudents}}
                         <option value="{{id}}">{{name}}</option>
                     {{/nonStudents}}
