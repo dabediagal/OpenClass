@@ -11,14 +11,14 @@ export class Subject {
 	}
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS
-		for (teacher of this.teachers) {
+		for (let teacher of this.teachers) {
 			teachersFullInfo.push(VirtualClass.getUser(teacher));
 		}
 		return teachersFullInfo;
 	}
 	getStudents() {
 		let studentsFullInfo = [];
-		for (student of this.students) {
+		for (let student of this.students) {
 			studentsFullInfo.push(VirtualClass.getUser(student));
 		}
 		return studentsFullInfo;
@@ -28,9 +28,9 @@ export class Subject {
 		//se une mediante el id interno que selecciona con un desplegable a la hora de añadir usuario
 		let user = VirtualClass.getUser(id);
 		if (user.type === 'teacher') {
-			this.teachers.add(id);
+			this.teachers.push(id);
 		} else {
-			this.students.add(id);
+			this.students.push(id);
 		}
 	}
 
