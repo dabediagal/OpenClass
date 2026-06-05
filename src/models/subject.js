@@ -48,5 +48,12 @@ export class Subject {
 		return nonStudents;
 	}
 
-	//deleteUser
+	deleteUser(id){
+		let user = VirtualClass.getUser(id);
+		if (user.type === 'teacher') {
+			this.teachers = this.teachers.filter(teacherId => teacherId !== id);
+		} else {
+			this.students = this.students.filter(studentId => studentId !== id);
+		}
+	}
 }

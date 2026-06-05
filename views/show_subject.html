@@ -12,7 +12,7 @@
     <h2>Profesores</h2>
     <ul>
         {{#teachers}}
-            <li>{{name}}</li>
+            <li>{{name}} <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> </li> 
         {{/teachers}}
     </ul>
     
@@ -46,7 +46,7 @@
 
     <ul>
         {{#students}}
-            <li>{{name}}</li>
+            <li>{{name}} <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> </li>
         {{/students}}
     </ul>
     

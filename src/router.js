@@ -74,3 +74,11 @@ router.get('/subject/:id/delete', (req, res) => {
 
 	res.redirect('/');
 });
+
+//Eliminar usuario de una asignatura
+router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.subjectId);
+	subject.deleteUser(req.params.userId);
+
+	res.redirect(`/subject/${req.params.subjectId}`);
+});	
