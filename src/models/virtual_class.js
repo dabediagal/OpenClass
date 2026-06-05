@@ -32,6 +32,11 @@ export class VirtualClass {
 
 	static deleteUser(id) {
 		VirtualClass.users.delete(id);
+		//ahora se borra tambien de la asignatura a la que pertenece:
+		for(let subject of VirtualClass.subjects.values()){
+			subject.students = subject.students.filter(studentId => studentId !== id);
+        	subject.teachers = subject.teachers.filter(teacherId => teacherId !== id);
+		}
 	}
 
 	static deleteSubject(id) {
