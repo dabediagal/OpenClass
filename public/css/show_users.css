@@ -109,8 +109,8 @@
     transition: background-color 0.2s, transform 0.2s;
 }
 
-.btn-add-user:hover {
-    background-color: #972a2a; /* Se aclara sutilmente al pasar el ratón */
+.btn-add-users:hover {
+    background-color: #477023; /* Se aclara sutilmente al pasar el ratón */
     transform: translateY(-1px);
 }
 
