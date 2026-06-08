@@ -4,35 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/public/css/show_users.css">
+    <link rel="stylesheet" href="/css/show_users.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>Usuarios</h1>
-    <div>
-        <h2>Profesores</h2>
-        {{#teachers}}
-            <p>
-                <b>Id:</b> {{id}} <br>
-                <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
-            </p>
-        {{/teachers}}
-        {{^teachers}}
-            <p>Aún no hay profes</p>
-        {{/teachers}}
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="/">Asignaturas</a>
+                <a href="/users" class="active">Gestionar usuarios</a>
+                <a href="/">Volver</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="title">
+                <h1>Usuarios</h1>
+            </header>
+            
+            <section class="teachers">
+                <h2>Profesores</h2>
+                {{#teachers}}
+                    <p>
+                        <b>Id:</b> {{id}} <br>
+                        <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
+                    </p>
+                {{/teachers}}
+                {{^teachers}}
+                    <p>Aún no hay profes</p>
+                {{/teachers}}
+                </section>
+            <section class="students">
+                <h2>Alumnos</h2>
+                {{#students}}
+                    <p>
+                        <b>Id:</b> {{id}} <br>
+                        <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
+                    </p>
+                {{/students}}
+                {{^students}}
+                    <p>Aún no hay alumnos</p>
+                {{/students}}
+                </section>
+            <a href="/new_user.html">Añadir usuarios</a>
+        </main>
+
     </div>
-    <div>
-        <h2>Alumnos</h2>
-        {{#students}}
-            <p>
-                <b>Id:</b> {{id}} <br>
-                <b>Nombre:</b> {{name}} <a href="/user/{{id}}/delete">Eliminar</a>
-            </p>
-        {{/students}}
-        {{^students}}
-            <p>Aún no hay alumnos</p>
-        {{/students}}
-    </div>
-    <a href="/new_user.html">Añadir usuarios</a>
-    <a href="/">Volver</a>
+    
 </body>
 </html>
