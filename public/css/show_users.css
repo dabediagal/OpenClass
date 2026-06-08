@@ -47,8 +47,8 @@
 }
 
 /* --- TARJETAS DE USUARIO (p con contenido) --- */
-.teachers p:has(a),
-.students p:has(a) {
+.teachers p,
+.students p{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -77,14 +77,6 @@
 .teachers p a:hover,
 .students p a:hover {
     background-color: #fee2e2;
-}
-
-/* Estado vacío */
-.teachers p:not(:has(a)),
-.students p:not(:has(a)) {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    margin: 0;
 }
 
 .btn-add-users {
