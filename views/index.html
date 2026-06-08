@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/css/index.css">
 </head>
 <body>
+    <div class="container">
     <h1>ASIGNATURAS</h1>
     {{#subjects}}
+    <div class="subject">
     <p><b>Nombre:</b> {{name}} </p>
     <a href="/subject/{{id}}">Ver más</a>
     <a href="/subject/{{id}}/delete">Eliminar</a>
+    </div>
     {{/subjects}}
     <br>
+    </div>
 
     {{^subjects}}
     <p>No hay asignaturas aún</p>
