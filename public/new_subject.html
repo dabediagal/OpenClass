@@ -5,18 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/new_subject.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Document</title>
+    <title>Nueva Asignatura</title>
 </head>
 <body>
-    <h1>Nueva asignatura</h1>
-    <form action="/subject/new" method="post">
-    <fieldset>
-        <label for="name">Nombre:</label>
-        <input type="text" name="name">
-        <input type="submit" value="Crear">
-        <p></p>
-        <a href="/" class="btn-return-sidebar">Volver</a>
-    </fieldset>
-    </form>
+    <div class="app-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="active">Añadir asignatura</a>
+                <a href="/" class="btn-return-sidebar">Volver</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="title">
+                <h1>Nueva Asignatura</h1>
+            </header>
+
+            <div class="form-card">
+                <form action="/subject/new" method="post">
+                    <fieldset>
+                        <div class="form-field">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="Crear">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
+
+    </div>
 </body>
 </html>
