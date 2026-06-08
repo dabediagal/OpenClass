@@ -22,7 +22,7 @@ router.post('/user/new', (req, res) => {
 	const user = new User(req.body.name, req.body.type);
 	VirtualClass.addUser(user);
 
-	res.redirect('/new_user.html');
+	res.json(user);
 });
 
 // Crear nueva asignatura
