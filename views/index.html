@@ -7,33 +7,46 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <div class="title">
-    <h1>ASIGNATURAS</h1>
-    </div>
-    <div class="subjects">
-    {{#subjects}}
-    <div class="subject">
-    <p class="nameSubject"><b>Nombre:</b> {{name}} </p>
-    <a href="/subject/{{id}}">Ver más</a>
-    <a href="/subject/{{id}}/delete">Eliminar</a>
-    </div>
-    {{/subjects}}
-    <br>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="active">Asignaturas</a>
+                <a href="/users">Ver usuarios</a>
+                <a href="/new_subject.html" class="btn-add-sidebar">Añadir asignatura</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="title">
+                <h1>Mis Asignaturas</h1>
+            </header>
+
+            <section class="subjects">
+                {{#subjects}}
+                <div class="subject">
+                    <p class="nameSubject"><b>Nombre:</b> {{name}} </p>
+                    <div class="subject-actions">
+                        <a href="/subject/{{id}}" class="btn-view">Ver más</a>
+                        <a href="/subject/{{id}}/delete" class="btn-delete">Eliminar</a>
+                    </div>
+                </div>
+                {{/subjects}}
+            </section>
+
+            {{^subjects}}
+            <div class="nosubjects">
+                <p>No hay asignaturas aún. ¡Crea la primera!</p>
+            </div>
+            {{/subjects}}
+
+        </main>
     </div>
 
-
-    {{^subjects}}
-    <div class="nosubjects">
-    <p>No hay asignaturas aún</p>
-    </div>
-    {{/subjects}}
-    <br>
-    
-    <div class="newsubject">
-    <a href="/new_subject.html">Añadir asignatura</a>
-    </div>
-
-    <a href="/users"> Ver usuarios</a>
-
-</body>
+</body> 
 </html>
