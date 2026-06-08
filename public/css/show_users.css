@@ -47,8 +47,8 @@
 }
 
 /* --- TARJETAS DE USUARIO (p con contenido) --- */
-.teachers p,
-.students p{
+.teacher,
+.student{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

@@ -29,10 +29,11 @@
             <section class="teachers">
                 <h2>Profesores</h2>
                 {{#teachers}}
-                    <p><b>Id:</b> {{id}}</p>
-                    <p><b>Nombre:</b> {{name}}</p>
-                    <p><a href="/user/{{id}}/delete">Eliminar</a></p>
-                    
+                    <div class="teacher">
+                        <p><b>Id: </b> {{id}}</p>
+                        <p><b>Nombre: </b> {{name}}</p>
+                        <p><a href="/user/{{id}}/delete">Eliminar</a></p>
+                    </div>
                 {{/teachers}}
                 {{^teachers}}
                     <p>Aún no hay profes</p>
@@ -42,9 +43,11 @@
             <section class="students">
                 <h2>Alumnos</h2>
                 {{#students}}
-                    <p><b>Id:</b>{{id}} </p>
-                    <p><b>Nombre:</b>{{name}}</p> 
-                    <p><a href="/user/{{id}}/delete">Eliminar</a></p>
+                    <div class="student">
+                        <p><b>Id: </b>{{id}} </p>
+                        <p><b>Nombre: </b>{{name}}</p> 
+                        <p><a href="/user/{{id}}/delete">Eliminar</a></p>
+                    </div>
                 {{/students}}
                 {{^students}}
                     <p>Aún no hay alumnos</p>
