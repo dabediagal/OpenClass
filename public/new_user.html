@@ -5,30 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/new_user.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Document</title>
+    <title>Nuevo Usuario</title>
 </head>
 <body>
-    <h1>Nuevo Usuario</h1>
+    <div class="app-container">
 
-    <form action="/user/new" method="post">
-        <fieldset>
-            <p>
-                <label for="name">Nombre:</label>
-                <input type="text" name="name">
-            </p>
-            <p>
-                <label for="type">Tipo:</label><br>
-                <input type="radio" id="teacher" name="type" value="teacher">
-                <label for="">Profesor</label><br>
-                <input type="radio" id="student" name="type" value="student" checked>
-                <label for="">Alumno</label>
-            </p>
-            <p>
-                <input type="submit" value="Crear">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="active">Añadir usuarios</a>
                 <a href="/users" class="btn-return-sidebar">Volver</a>
-            </p>
-        </fieldset>
-    </form>
+            </nav>
+        </aside>
 
+        <main class="main-content">
+            <header class="title">
+                <h1>Nuevo Usuario</h1>
+            </header>
+
+            <div class="form-card">
+                <form action="/user/new" method="post">
+                    <fieldset>
+                        <div class="form-field">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-field">
+                            <label>Tipo:</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" id="teacher" name="type" value="teacher">
+                                    Profesor
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" id="student" name="type" value="student" checked>
+                                    Alumno
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="Crear">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
+
+    </div>
 </body>
 </html>

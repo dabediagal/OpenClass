@@ -1,0 +1,100 @@
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.main-content h1 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* --- TARJETA DEL FORMULARIO --- */
+.form-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    max-width: 480px;
+}
+
+.form-card fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- CAMPOS --- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-field label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-field input[type="text"] {
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #334155;
+    background-color: #f8fafc;
+    transition: border-color 0.2s;
+}
+
+.form-field input[type="text"]:focus {
+    outline: none;
+    border-color: #2d531a;
+    background-color: #ffffff;
+}
+
+/* --- RADIO BUTTONS --- */
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    accent-color: #2d531a;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* --- BOTÓN CREAR --- */
+.form-actions input[type="submit"] {
+    padding: 10px 24px;
+    background-color: #2d531a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-actions input[type="submit"]:hover {
+    background-color: #223f14;
+}
