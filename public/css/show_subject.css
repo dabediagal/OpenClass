@@ -1,0 +1,199 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Una fuente más moderna para apps */
+}
+
+body {
+    background-color: #f8fafc; /* Fondo gris muy claro, estilo dashboard */
+    color: #334155;
+}
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- MENÚ LATERAL (SIDEBAR) --- */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.sidebar-brand h2 {
+    font-size: 1.4rem;
+    color: #1e293b;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #64748b;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-menu a:hover, 
+.sidebar-menu a.active {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Botón llamativo dentro del menú */
+.sidebar-menu .btn-add-sidebar {
+    margin-top: 20px;
+    background-color: #2d531a; /* Tu verde oscuro */
+    color: white;
+    text-align: center;
+}
+
+.sidebar-menu .btn-add-sidebar:hover {
+    background-color: #223f14;
+    color: white;
+}
+
+
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.main-content h1 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* --- GRID DE DOS COLUMNAS --- */
+.sections-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* --- CAJITAS (Profesores / Alumnos) --- */
+.teachers,
+.students {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.teachers h2,
+.students h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* --- LISTA DE USUARIOS --- */
+.teachers ul,
+.students ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.teachers li,
+.students li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.teachers li a,
+.students li a {
+    text-decoration: none;
+    color: #ef4444;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.teachers li a:hover,
+.students li a:hover {
+    background-color: #fee2e2;
+}
+
+/* Estado vacío */
+.teachers p,
+.students p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* --- FORMULARIO DE AÑADIR --- */
+.teachers fieldset,
+.students fieldset {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.teachers legend,
+.students legend {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    padding: 0 6px;
+}
+
+.teachers select,
+.students select {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #334155;
+    background-color: #f8fafc;
+    margin-right: 10px;
+}
+
+.teachers input[type="submit"],
+.students input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #2d531a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.teachers input[type="submit"]:hover,
+.students input[type="submit"]:hover {
+    background-color: #223f14;
+}

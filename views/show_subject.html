@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/public/css/show_subject.css">
+    <link rel="stylesheet" href="/css/show_subject.css">
 </head>
 <body>
+    <div class="app-container">
+    <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="active">Asignatura</a>
+                <a href="/"> Volver </a>
+            </nav>
+    </aside>
+
+    <main class="main-content">
     <h1>{{subject.name}}</h1>
 
-    
+    <div class="sections-grid">
+    <section class="teachers">
     <h2>Profesores</h2>
     <ul>
         {{#teachers}}
@@ -41,8 +54,9 @@
             <p><i>No hay más profesores disponibles para añadir.</i></p>
         </fieldset>
     {{/nonTeachers.length}}
+    </section>
 
-
+    <section class="students">
     <h2>Alumnos</h2>
 
     <ul>
@@ -76,8 +90,10 @@
             <p><i>No hay más alumnos disponibles para añadir.</i></p>
         </fieldset>
     {{/nonStudents.length}}
-
-    <a href="/">Volver</a>
+    </section>
+    </div>
+    </main>
+    </div>
     
 </body>
 </html>
