@@ -83,6 +83,32 @@
     background-color: #fee2e2;
 }
 
+.btn-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre el icono/texto */
+    
+    background-color: transparent;
+    color: #2D531A; /* Verde intermedio */
+    border: 2px dashed #2D531A; /* Borde discontinuo */
+    border-radius: 12px;
+    padding: 24px;
+    min-height: 160px; /* Misma altura mínima que tus asignaturas */
+    
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+    background-color: #f1f5f9; /* Fondo grisáceo muy suave al pasar el ratón */
+    border-color: #477023; /* Se aclara el borde */
+    color: #477023;
+    transform: translateY(-2px); /* Pequeño salto hacia arriba */
+}
 
 /* --- ESTADOS VACÍOS --- */
 .nosubjects {

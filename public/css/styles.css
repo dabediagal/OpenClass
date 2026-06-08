@@ -56,8 +56,8 @@ body {
     color: #ffffff; /* Letras totalmente blancas al activarse */
 }
 
-/* Botón llamativo dentro del menú (Añadir asignatura) */
-.sidebar-menu .btn-add-sidebar {
+/* Botón llamativo dentro del menú (Volver) */
+.sidebar-menu .btn-return-sidebar {
     margin-top: 20px;
     background-color: #477023; /* Fern Green: Un verde más vivo para que parezca un botón de acción */
     color: white;
@@ -65,7 +65,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.sidebar-menu .btn-add-sidebar:hover {
+.sidebar-menu .btn-return-sidebar:hover {
     background-color: #6E8649; /* Reseda Green: Se aclara elegantemente al pasar el cursor */
     color: #0D330E; /* Cambia a texto oscuro para mantener legibilidad con el fondo claro */
 }
