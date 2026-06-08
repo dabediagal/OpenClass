@@ -30,7 +30,9 @@
 }
 
 .nosubjects{
-
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 .newsubject{
 
@@ -39,4 +41,5 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #2D531A;
     color: white;
+    text-align: center;
 }
