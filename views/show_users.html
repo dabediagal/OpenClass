@@ -18,7 +18,7 @@
             <nav class="sidebar-menu">
                 <a href="/">Asignaturas</a>
                 <a href="/users" class="active">Gestionar usuarios</a>
-                <a href="/">Volver</a>
+                <a href="/" class="btn-add-sidebar">Volver</a>
             </nav>
         </aside>
 
@@ -38,7 +38,8 @@
                 {{^teachers}}
                     <p>Aún no hay profes</p>
                 {{/teachers}}
-                </section>
+            </section>
+
             <section class="students">
                 <h2>Alumnos</h2>
                 {{#students}}
@@ -50,7 +51,7 @@
                 {{^students}}
                     <p>Aún no hay alumnos</p>
                 {{/students}}
-                </section>
+            </section>
             <a href="/new_user.html">Añadir usuarios</a>
         </main>
 

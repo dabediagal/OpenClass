@@ -19,8 +19,8 @@ body {
 /* --- MENÚ LATERAL (SIDEBAR) --- */
 .sidebar {
     width: 260px;
-    background-color: #ffffff;
-    border-right: 1px solid #e2e8f0;
+    background-color: #0D330E; /* Pakistan Green: fondo oscuro y elegante */
+    border-right: 1px solid rgba(255, 255, 255, 0.1); /* Línea sutil blanca en vez de gris */
     display: flex;
     flex-direction: column;
     padding: 24px;
@@ -28,9 +28,10 @@ body {
 
 .sidebar-brand h2 {
     font-size: 1.4rem;
-    color: #1e293b;
+    color: #ffffff; /* Texto en blanco para máximo contraste */
     margin-bottom: 40px;
     font-weight: 700;
+    background-color: transparent; /* Eliminado el fondo gris/verde que descuadraba el bloque */
 }
 
 .sidebar-menu {
@@ -41,29 +42,31 @@ body {
 
 .sidebar-menu a {
     text-decoration: none;
-    color: #64748b;
+    color: #cbd5e1; /* Gris muy claro/blanquecino para que se lea perfectamente */
     padding: 12px 16px;
     border-radius: 8px;
     font-weight: 500;
     transition: all 0.2s ease;
 }
 
+/* Enlaces activos o al pasar el ratón por encima */
 .sidebar-menu a:hover, 
 .sidebar-menu a.active {
-    background-color: #f1f5f9;
-    color: #0f172a;
+    background-color: #2D531A; /* Dark Moss: Un verde intermedio que destaca del fondo */
+    color: #ffffff; /* Letras totalmente blancas al activarse */
 }
 
-/* Botón llamativo dentro del menú */
+/* Botón llamativo dentro del menú (Añadir asignatura) */
 .sidebar-menu .btn-add-sidebar {
     margin-top: 20px;
-    background-color: #2d531a; /* Tu verde oscuro */
+    background-color: #477023; /* Fern Green: Un verde más vivo para que parezca un botón de acción */
     color: white;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-menu .btn-add-sidebar:hover {
-    background-color: #223f14;
-    color: white;
+    background-color: #6E8649; /* Reseda Green: Se aclara elegantemente al pasar el cursor */
+    color: #0D330E; /* Cambia a texto oscuro para mantener legibilidad con el fondo claro */
 }
 
