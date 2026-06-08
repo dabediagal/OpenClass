@@ -4,9 +4,8 @@ async function newUser(event){
     const formData = new FormData(event.target);
     const response = await fetch(`/user/new`, {
 		method: 'POST',
-		body: formData,
+		body: new URLSearchParams(formData),
 	});
-	const post = await response.json();
 
     if(response.ok){
         const stay = confirm('¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?');
