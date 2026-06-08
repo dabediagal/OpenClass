@@ -61,11 +61,6 @@
     margin: 0;
 }
 
-.teachers p br,
-.students p br {
-    display: block;
-    margin-bottom: 2px;
-}
 
 .teachers p a,
 .students p a {
