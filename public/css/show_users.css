@@ -64,7 +64,7 @@
 .teachers p br,
 .students p br {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 .teachers p a,
