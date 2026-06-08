@@ -38,6 +38,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 1;
 }
 
 .sidebar-menu a {
@@ -58,7 +59,7 @@ body {
 
 /* Botón llamativo dentro del menú (Volver) */
 .sidebar-menu .btn-return-sidebar {
-    margin-top: 20px;
+    margin-top: auto;
     background-color: #477023; /* Fern Green: Un verde más vivo para que parezca un botón de acción */
     color: white;
     text-align: center;
