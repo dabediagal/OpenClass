@@ -16,7 +16,6 @@
                 <h2>Aula Virtual</h2>
             </div>
             <nav class="sidebar-menu">
-                <a href="/">Asignaturas</a>
                 <a href="/users" class="active">Gestionar usuarios</a>
                 <a href="/" class="btn-return-sidebar">Volver</a>
             </nav>
@@ -26,7 +25,7 @@
             <header class="title">
                 <h1>Usuarios</h1>
             </header>
-            
+            <div class="sections-grid">
             <section class="teachers">
                 <h2>Profesores</h2>
                 {{#teachers}}
@@ -53,6 +52,7 @@
                 {{/students}}
             </section>
             <a href="/new_user.html">Añadir usuarios</a>
+            </div>
         </main>
 
     </div>
