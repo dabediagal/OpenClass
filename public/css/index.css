@@ -1,8 +1,11 @@
 .subjects{
-
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Espaciado entre las cajitas */
+    gap: 20px; 
+    padding: 20px;
 }
 .subject{
-
+    border-radius: 12px;
 }
 .nosubjects{
 
