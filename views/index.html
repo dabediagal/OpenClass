@@ -18,7 +18,10 @@
             </div>
             <nav class="sidebar-menu">
                 <a href="#" class="active">Asignaturas</a>
+                {{#isAdmin}}
                 <a href="/users">Gestionar usuarios</a>
+                {{/isAdmin}}
+
                 {{> profile}}
             </nav>
         </aside>

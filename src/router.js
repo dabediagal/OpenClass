@@ -41,9 +41,10 @@ router.get('/', (req, res) => {
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	}
-	const name=autenticatedUser.name;
+	const name = autenticatedUser.name;
+	const isAdmin = autenticatedUser.type === 'admin';
 	const subjects = VirtualClass.getAllSubjects();
-	res.render('index', { subjects: subjects, userName: name });
+	res.render('index', { subjects: subjects, userName: name, isAdmin: isAdmin });
 });
 
 // Crear nuevo usuario
@@ -71,7 +72,7 @@ router.get('/subject/:id', (req, res) => {
 	// todos los teachers y students que NO pertenecen a esa asignatura
 	const nonTeachers = subject.getNonTeachers();
 	const nonStudents = subject.getNonStudents();
-	const name=autenticatedUser.name;
+	const name = autenticatedUser.name;
 
 	res.render('show_subject', {
 		subject,
@@ -80,7 +81,7 @@ router.get('/subject/:id', (req, res) => {
 		nonTeachers,
 		nonStudents,
 		topics: Array.from(subject.topics.values()),
-		userName: name
+		userName: name,
 	});
 });
 
@@ -98,7 +99,7 @@ router.get('/profile', (req, res) => {
 router.get('/users', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
-	const name=autenticatedUser.name;
+	const name = autenticatedUser.name;
 
 	res.render('show_users', { students: students, teachers: teachers, userName: name });
 });
