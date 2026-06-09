@@ -63,9 +63,17 @@ router.post('/subject/:id/linkUser', (req, res) => {
 
 // Eliminar usuario
 router.get('/user/:id/delete', (req, res) => {
-	VirtualClass.deleteUser(req.params.id);
+	let response = { valid: false, message: '' };
+	const user = VirtualClass.deleteUser(req.params.id);
 
-	res.redirect('/users');
+	if (user) {
+		response.valid = true;
+		response.message = 'El usuario ha sido eliminado correctamente';
+	} else {
+		response.message = 'Usuario no encontrado';
+	}
+
+	res.json(response);
 });
 
 // Eliminar asignatura

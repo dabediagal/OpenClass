@@ -62,21 +62,27 @@
 }
 
 
-.teachers p a,
-.students p a {
+.teachers p button,
+.students p button {
+    background: transparent; 
+    border: none;            
+    cursor: pointer;         
+    font-family: inherit;    
+    
     text-decoration: none;
     color: #ef4444;
     font-size: 0.85rem;
     font-weight: 500;
     padding: 4px 8px;
     border-radius: 6px;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
     white-space: nowrap;
 }
 
-.teachers p a:hover,
-.students p a:hover {
+.teachers p button:hover,
+.students p button:hover {
     background-color: #fee2e2;
+    color: #dc2626;
 }
 
 .btn-add-users {
