@@ -71,7 +71,7 @@ router.get('/subject/:id', (req, res) => {
 	const nonTeachers = subject.getNonTeachers();
 	const nonStudents = subject.getNonStudents();
 
-	res.render('show_subject', { subject, teachers, students, nonTeachers, nonStudents });
+	res.render('show_subject', { subject, teachers, students, nonTeachers, nonStudents, topics: Array.from(subject.topics.values()) });
 });
 
 // Todos los usuarios

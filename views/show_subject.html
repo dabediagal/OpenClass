@@ -102,21 +102,21 @@
 
         <script>const SUBJECT_ID = '{{subject.id}}';</script>
 
-        {{#subject.topics.length}}
+        {{#topics.length}}
         <ul>
-            {{#subject.topics}}
+            {{#topics}}
                 <li>
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
                     {{#attachment}}<a href="/uploads/{{attachment}}">Ver PDF</a>{{/attachment}}
                     <button onclick="deleteTopic('{{id}}')">Eliminar</button>
                 </li>
-            {{/subject.topics}}
+            {{/topics}}
         </ul>
-        {{/subject.topics.length}}
+        {{/topics.length}}
 
-        {{^subject.topics.length}}
+        {{^topics.length}}
             <p>Aún no hay temas.</p>
-        {{/subject.topics.length}}
+        {{/topics.length}}
 
         <form id="newTopic" onsubmit="newTopic(event)">
             <fieldset>

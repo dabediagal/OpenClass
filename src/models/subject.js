@@ -9,7 +9,7 @@ export class Subject {
 		this.name = name;
 		this.teachers = []; //RECIBE IDS SÓLO
 		this.students = [];
-		this.topics=[]; //empiezan en 0 estos topics y luego se van añadiendo 
+		this.topics = new Map();
 		this.description=description;
 		this.room=null; //de momento no hacemos nada con el room
 	}
@@ -63,13 +63,13 @@ export class Subject {
 
 	addTopic(title, descripcion, order, attachment) {
 		const topic = new Topic(title, descripcion, order, attachment);
-		this.topics.push(topic);
+		this.topics.set(topic.id, topic);
 		return topic;
 	}
 
 	deleteTopic(id) {
-		const topic = this.topics.find(t => t.id === id);
-		this.topics = this.topics.filter(t => t.id !== id);
+		const topic = this.topics.get(id);
+		this.topics.delete(id);
 		return topic;
 	}
 }
