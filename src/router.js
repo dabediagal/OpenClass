@@ -28,7 +28,7 @@ router.post('/user/login', (req, res) => {
 
 	if (user.password === req.body.password) {
 		response.valid = true;
-		autenticatedUser = user.id;
+		autenticatedUser = user;
 	} else {
 		response.message = 'Contraseña incorrecta.';
 	}
@@ -41,8 +41,9 @@ router.get('/', (req, res) => {
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	}
+	const name=autenticatedUser.name;
 	const subjects = VirtualClass.getAllSubjects();
-	res.render('index', { subjects: subjects });
+	res.render('index', { subjects: subjects, userName: name });
 });
 
 // Crear nuevo usuario
@@ -70,6 +71,7 @@ router.get('/subject/:id', (req, res) => {
 	// todos los teachers y students que NO pertenecen a esa asignatura
 	const nonTeachers = subject.getNonTeachers();
 	const nonStudents = subject.getNonStudents();
+	const name=autenticatedUser.name;
 
 	res.render('show_subject', {
 		subject,
@@ -78,6 +80,7 @@ router.get('/subject/:id', (req, res) => {
 		nonTeachers,
 		nonStudents,
 		topics: Array.from(subject.topics.values()),
+		userName: name
 	});
 });
 
@@ -85,8 +88,9 @@ router.get('/subject/:id', (req, res) => {
 router.get('/users', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
+	const name=autenticatedUser.name;
 
-	res.render('show_users', { students: students, teachers: teachers });
+	res.render('show_users', { students: students, teachers: teachers, userName: name });
 });
 
 // Asociar usuario a una asignatura

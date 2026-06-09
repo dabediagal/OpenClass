@@ -21,3 +21,6 @@ initVirtualClass();
 app.use('/', router);
 
 app.listen(3000, () => console.log('Web ready in http://localhost:3000/'));
+
+//para ver los html reutilizables en las views
+app.engine('html', mustacheExpress('./views/partials', '.html'));
