@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/show_profile.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app-container">
+    <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Aula Virtual</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="active">Perfil</a>
+                <a href="/" class="btn-return-sidebar"> Volver </a>
+            </nav>
+    </aside>
+
+    <main class="main-content">
+    <h1>{{user.name}}</h1>
+    <p class="user-type">{{user.type}}</p>
+    <p class="user-email">{{user.email}}</p>
+    <p class="user-id">{{user.id}}</p>
+    </main>
+    </div>
+</body>
+</html>

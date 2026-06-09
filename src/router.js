@@ -84,6 +84,16 @@ router.get('/subject/:id', (req, res) => {
 	});
 });
 
+// Perfil del usuario autenticado
+router.get('/profile', (req, res) => {
+	if (!autenticatedUser){
+		return res.redirect('/login.html');
+	}else{
+		res.render('show_profile', { user : autenticatedUser });
+	}
+	
+});
+
 // Todos los usuarios
 router.get('/users', (req, res) => {
 	const students = VirtualClass.getAllStudents();
