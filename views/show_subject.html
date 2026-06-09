@@ -103,6 +103,7 @@
             {{#subject.topics}}
                 <li>
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
+                    {{#attachment}}<a href="/uploads/{{attachment}}">Ver PDF</a>{{/attachment}}
                     <a href="/subject/{{subject.id}}/topic/{{id}}/delete">Eliminar</a>
                 </li>
             {{/subject.topics}}
@@ -113,7 +114,7 @@
             <p>Aún no hay temas.</p>
         {{/subject.topics.length}}
 
-        <form action="/subject/{{subject.id}}/topic/new" method="post">
+        <form action="/subject/{{subject.id}}/topic/new" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>Añadir tema:</legend>
                 <label>Título: <input type="text" name="title" required></label>

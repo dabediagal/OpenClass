@@ -61,8 +61,8 @@ export class Subject {
 		}
 	}
 
-	addTopic(title, descripcion, order) {
-		const topic = new Topic(title, descripcion, order);
+	addTopic(title, descripcion, order, attachment) {
+		const topic = new Topic(title, descripcion, order, attachment);
 		this.topics.push(topic);
 		return topic;
 	}
