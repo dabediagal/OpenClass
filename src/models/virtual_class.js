@@ -46,6 +46,11 @@ export class VirtualClass {
 	}
 
 	static deleteSubject(id) {
+		const subject = VirtualClass.getSubject(id);
+		if (!subject) {
+			return undefined;
+		}
 		VirtualClass.subjects.delete(id);
+		return subject;
 	}
 }
