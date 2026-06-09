@@ -62,7 +62,7 @@ export class Subject {
 	}
 
 	addTopic(title, descripcion, order, attachment) {
-		const orderNum = Number(order);
+		const orderNum = order;
 		for (const t of this.topics.values()) {
 			if (t.order === orderNum) {
 				throw new Error(`Ya existe un topic en la posición ${orderNum}`);
