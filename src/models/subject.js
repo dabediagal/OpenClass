@@ -11,6 +11,7 @@ export class Subject {
 		this.students = [];
 		this.topics=[]; //empiezan en 0 estos topics y luego se van añadiendo 
 		this.description=description;
+		this.room=null; //de momento no hacemos nada con el room
 	}
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS
