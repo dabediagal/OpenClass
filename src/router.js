@@ -8,8 +8,8 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 const router = express.Router();
-const upload=multer({dest:'uploads/'}); 
-const UPLOADS_FOLDER='uploads/';
+const upload = multer({ dest: 'uploads/' });
+const UPLOADS_FOLDER = 'uploads/';
 
 export default router;
 
@@ -34,7 +34,6 @@ router.post('/subject/new', (req, res) => {
 
 	res.json(subject);
 });
-
 
 // Mostrar una asignatura
 router.get('/subject/:id', (req, res) => {
@@ -105,35 +104,35 @@ router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 
 // Añadir topic a una asignatura
 router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
-	const pdfName=req.file?.filename;
+	const pdfName = req.file?.filename;
 	const subject = VirtualClass.getSubject(req.params.id);
-	subject.addTopic(req.body.title, req.body.descripcion, req.body.order,pdfName);
+	subject.addTopic(req.body.title, req.body.descripcion, req.body.order, pdfName);
 
 	res.redirect(`/subject/${req.params.id}`);
 });
 
 // Eliminar topic de una asignatura CON AJAX
 router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
-	let response= { valid: false, message: '' };
+	let response = { valid: false, message: '' };
 	const subject = VirtualClass.getSubject(req.params.subjectId);
-	const topic= subject.deleteTopic(req.params.topicId);
+	const topic = subject.deleteTopic(req.params.topicId);
 	if (topic) {
-        if (topic.attachment) {
-            await fs.rm(UPLOADS_FOLDER + topic.attachment);
-        }
+		if (topic.attachment) {
+			await fs.rm(UPLOADS_FOLDER + topic.attachment);
+		}
 
-        response.valid = true;
-        response.message = 'El topic ha sido borrado correctamente';
-    } else {
-        response.message = 'File not found!';
-    }
+		response.valid = true;
+		response.message = 'El topic ha sido borrado correctamente';
+	} else {
+		response.message = 'File not found!';
+	}
 
-    res.json(response);
-});		
+	res.json(response);
+});
 
 // Iniciar Sesion
 router.post('/user/login', (req, res) => {
-	const user = VirtualClass.getUser()
+	const user = VirtualClass.getUser();
 	VirtualClass.addUser(user);
 
 	res.json(user);
