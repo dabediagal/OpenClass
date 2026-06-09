@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/show_subject.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/delete_topic.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -98,13 +99,15 @@
     <section class="topics">
         <h2>Temas</h2>
 
+        <script>const SUBJECT_ID = '{{subject.id}}';</script>
+
         {{#subject.topics.length}}
         <ul>
             {{#subject.topics}}
                 <li>
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
                     {{#attachment}}<a href="/uploads/{{attachment}}">Ver PDF</a>{{/attachment}}
-                    <a href="/subject/{{subject.id}}/topic/{{id}}/delete">Eliminar</a>
+                    <button onclick="deleteTopic('{{id}}')">Eliminar</button>
                 </li>
             {{/subject.topics}}
         </ul>

@@ -8,7 +8,8 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 const router = express.Router();
-const upload=multer({dest:'uploads/'}); //este upload se usa para subir el pdf d topics
+const upload=multer({dest:'uploads/'}); 
+const UPLOADS_FOLDER='uploads/';
 
 export default router;
 
@@ -111,10 +112,21 @@ router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
 	res.redirect(`/subject/${req.params.id}`);
 });
 
-// Eliminar topic de una asignatura
-router.get('/subject/:subjectId/topic/:topicId/delete', (req, res) => {
+// Eliminar topic de una asignatura CON AJAX
+router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
+	let response= { valid: false, message: '' };
 	const subject = VirtualClass.getSubject(req.params.subjectId);
-	subject.deleteTopic(req.params.topicId);
+	const topic= subject.deleteTopic(req.params.topicId);
+	if (topic) {
+        if (topic.attachment) {
+            await fs.rm(UPLOADS_FOLDER + topic.attachment);
+        }
 
-	res.redirect(`/subject/${req.params.subjectId}`);
+        response.valid = true;
+        response.message = 'El topic ha sido borrado correctamente';
+    } else {
+        response.message = 'File not found!';
+    }
+
+    res.json(response);
 });	
