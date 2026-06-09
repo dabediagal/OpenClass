@@ -62,14 +62,27 @@ export class Subject {
 	}
 
 	addTopic(title, descripcion, order, attachment) {
-		const topic = new Topic(title, descripcion, order, attachment);
+		const orderNum = Number(order);
+		for (const t of this.topics.values()) {
+			if (t.order === orderNum) {
+				throw new Error(`Ya existe un topic en la posición ${orderNum}`);
+			}
+		}
+		const topic = new Topic(title, descripcion, orderNum, attachment);
 		this.topics.set(topic.id, topic);
 		return topic;
 	}
 
 	deleteTopic(id) {
 		const topic = this.topics.get(id);
+		if (!topic) return null;
+		const deletedOrder = topic.order;
 		this.topics.delete(id);
+		for (const t of this.topics.values()) {
+			if (t.order > deletedOrder){
+				t.order--;
+			}
+		}
 		return topic;
 	}
 }
