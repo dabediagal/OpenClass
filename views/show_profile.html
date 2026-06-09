@@ -20,10 +20,12 @@
     </aside>
 
     <main class="main-content">
-    <h1>{{user.name}}</h1>
-    <p class="user-type">{{user.type}}</p>
-    <p class="user-email">{{user.email}}</p>
-    <p class="user-id">{{user.id}}</p>
+        <h1>{{user.name}}</h1>
+        <div class="profile-card">
+            <p class="user-type"><b>Tipo: </b> {{user.type}}</p>
+            <p class="user-email"><b>Email: </b> {{user.email}}</p>
+            <p class="user-id"><b>ID: </b> {{user.id}}</p>
+        </div>
     </main>
     </div>
 </body>
