@@ -9,19 +9,42 @@ export function initVirtualClass() {
 	// Creamos Profesores de prueba
 	const profe1 = new User('Ada Lovelace', 'teacher', 'adalovelace@email.com', '1234');
 	const profe2 = new User('Alan Turing', 'teacher', 'alanturing@email.com', '1234');
+    const profe3 = new User('Dennis Ritchie', 'teacher', 'dennis.ritchie@email.com', '1234');
+	const profe4 = new User('Linus Torvalds', 'teacher', 'linus.torvalds@email.com', '1234');
+	const profe5 = new User('Tim Berners-Lee', 'teacher', 'tim.berners@email.com', '1234');
 
 	// Creamos Alumnos de prueba
 	const alumno1 = new User('Carlos Pérez', 'student', 'carlosperez@email.com', '1234');
 	const alumno2 = new User('Lucía Fernández', 'student', 'luciafernandez@email.com', '1234');
 	const alumno3 = new User('Mateo Gómez', 'student', 'mateogomez@email.com', '1234');
+    const alumno4 = new User('Elena Rodríguez', 'student', 'elena.rod@email.com', '1234');
+	const alumno5 = new User('Alejandro Muñoz', 'student', 'ale.munoz@email.com', '1234');
+	const alumno6 = new User('Sofía Benítez', 'student', 'sofia.b@email.com', '1234');
+	const alumno7 = new User('Diego Martínez', 'student', 'diego.mtnz@email.com', '1234');
+	const alumno8 = new User('Alba Serrano', 'student', 'alba.serrano@email.com', '1234');
+	const alumno9 = new User('Javier López', 'student', 'javi.lopez@email.com', '1234');
+	const alumno10 = new User('Martina Sanz', 'student', 'martina.sanz@email.com', '1234');
 
 	// Los añadimos a la clase virtual
 	VirtualClass.addUser(admin);
+
 	VirtualClass.addUser(profe1);
 	VirtualClass.addUser(profe2);
+	VirtualClass.addUser(profe3);
+	VirtualClass.addUser(profe4);
+	VirtualClass.addUser(profe5);
+
 	VirtualClass.addUser(alumno1);
 	VirtualClass.addUser(alumno2);
 	VirtualClass.addUser(alumno3);
+	VirtualClass.addUser(alumno4);
+	VirtualClass.addUser(alumno5);
+	VirtualClass.addUser(alumno6);
+	VirtualClass.addUser(alumno7);
+	VirtualClass.addUser(alumno8);
+	VirtualClass.addUser(alumno9);
+	VirtualClass.addUser(alumno10);
+
 
 	// También creamos un par de asignaturas de prueba
 	const mates = new Subject('Matemáticas Avanzadas', 'Son mates avanzadas como bien pone ahí');
