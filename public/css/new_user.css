@@ -43,7 +43,9 @@
     color: #475569;
 }
 
-.form-field input[type="text"] {
+.form-field input[type="text"], 
+.form-field input[type="email"], 
+.form-field input[type="password"] {
     padding: 10px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
@@ -53,7 +55,9 @@
     transition: border-color 0.2s;
 }
 
-.form-field input[type="text"]:focus {
+.form-field input[type="text"]:focus,
+.form-field input[type="email"]:focus, 
+.form-field input[type="password"]:focus {
     outline: none;
     border-color: #2d531a;
     background-color: #ffffff;
