@@ -21,6 +21,7 @@
 
     <main class="main-content">
     <h1>{{subject.name}}</h1>
+    {{#subject.description}}<p class="subject-description">{{subject.description}}</p>{{/subject.description}}
 
     <div class="sections-grid">
     <section class="teachers">
@@ -93,8 +94,38 @@
     {{/nonStudents.length}}
     </section>
     </div>
+
+    <section class="topics">
+        <h2>Temas</h2>
+
+        {{#subject.topics.length}}
+        <ul>
+            {{#subject.topics}}
+                <li>
+                    <strong>{{order}}. {{title}}</strong> — {{descripcion}}
+                    <a href="/subject/{{subject.id}}/topic/{{id}}/delete">Eliminar</a>
+                </li>
+            {{/subject.topics}}
+        </ul>
+        {{/subject.topics.length}}
+
+        {{^subject.topics.length}}
+            <p>Aún no hay temas.</p>
+        {{/subject.topics.length}}
+
+        <form action="/subject/{{subject.id}}/topic/new" method="post">
+            <fieldset>
+                <legend>Añadir tema:</legend>
+                <label>Título: <input type="text" name="title" required></label>
+                <label>Descripción: <input type="text" name="descripcion"></label>
+                <label>Orden: <input type="number" name="order" min="1"></label>
+                <input type="submit" value="Añadir">
+            </fieldset>
+        </form>
+    </section>
+
     </main>
     </div>
-    
+
 </body>
 </html>

@@ -27,7 +27,7 @@ router.post('/user/new', (req, res) => {
 
 // Crear nueva asignatura
 router.post('/subject/new', (req, res) => {
-	const subject = new Subject(req.body.name);
+	const subject = new Subject(req.body.name, req.body.description);
 	VirtualClass.addSubject(subject);
 
 	res.json(subject);
@@ -97,6 +97,22 @@ router.get('/subject/:id/delete', (req, res) => {
 router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.subjectId);
 	subject.deleteUser(req.params.userId);
+
+	res.redirect(`/subject/${req.params.subjectId}`);
+});
+
+// Añadir topic a una asignatura
+router.post('/subject/:id/topic/new', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.id);
+	subject.addTopic(req.body.title, req.body.descripcion, req.body.order);
+
+	res.redirect(`/subject/${req.params.id}`);
+});
+
+// Eliminar topic de una asignatura
+router.get('/subject/:subjectId/topic/:topicId/delete', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.subjectId);
+	subject.deleteTopic(req.params.topicId);
 
 	res.redirect(`/subject/${req.params.subjectId}`);
 });	
