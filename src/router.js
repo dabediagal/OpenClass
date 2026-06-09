@@ -20,10 +20,9 @@ export default router;
 router.post('/user/login', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.getUserByEmail(req.body.email);
-	
+
 	if (!user) {
 		response.message = 'El email no está registrado.';
-		response.valid = false;
 		return res.json(response);
 	}
 
@@ -32,21 +31,15 @@ router.post('/user/login', (req, res) => {
 		autenticatedUser = user.id;
 	} else {
 		response.message = 'Contraseña incorrecta.';
-		response.valid = false;
 	}
 
 	res.json(response);
 });
 
-// Iniciar Sesión
-router.get('/login', (req, res) => {
-	res.sendFile(path.resolve('public/login.html'));
-});
-
 // Página principal
 router.get('/', (req, res) => {
-	if(!autenticatedUser){
-		return res.redirect('/login');
+	if (!autenticatedUser) {
+		return res.redirect('/login.html');
 	}
 	const subjects = VirtualClass.getAllSubjects();
 	res.render('index', { subjects: subjects });
@@ -78,7 +71,14 @@ router.get('/subject/:id', (req, res) => {
 	const nonTeachers = subject.getNonTeachers();
 	const nonStudents = subject.getNonStudents();
 
-	res.render('show_subject', { subject, teachers, students, nonTeachers, nonStudents, topics: Array.from(subject.topics.values()) });
+	res.render('show_subject', {
+		subject,
+		teachers,
+		students,
+		nonTeachers,
+		nonStudents,
+		topics: Array.from(subject.topics.values()),
+	});
 });
 
 // Todos los usuarios

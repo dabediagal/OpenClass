@@ -1,16 +1,16 @@
 async function login(event) {
-    event.preventDefault();
+	event.preventDefault();
 
-    const formData = new FormData(event.target);
-	const response = await fetch(`/user/new`, {
+	const formData = new FormData(event.target);
+	const response = await fetch(`/user/login`, {
 		method: 'POST',
 		body: new URLSearchParams(formData),
 	});
-    const result = await response.json();
+	const result = await response.json();
 
-    if(result.valid){
-        window.location = '/';
-    } else {
-        alert(`Error: ${result.message}`);
-    }
+	if (result.valid) {
+		window.location = '/';
+	} else {
+		alert(`Error: ${result.message}`);
+	}
 }
