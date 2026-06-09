@@ -29,8 +29,10 @@ router.post('/user/new', (req, res) => {
 router.post('/subject/new', (req, res) => {
 	const subject = new Subject(req.body.name);
 	VirtualClass.addSubject(subject);
-	res.redirect('/new_subject.html');
+
+	res.json(subject);
 });
+
 
 // Mostrar una asignatura
 router.get('/subject/:id', (req, res) => {
@@ -78,9 +80,17 @@ router.get('/user/:id/delete', (req, res) => {
 
 // Eliminar asignatura
 router.get('/subject/:id/delete', (req, res) => {
-	VirtualClass.deleteSubject(req.params.id);
+	let response = { valid: false, message: '' };
+	const subject = VirtualClass.deleteSubject(req.params.id);
 
-	res.redirect('/');
+	if (subject) {
+		response.valid = true;
+		response.message = 'La asignatura ha sido eliminada correctamente';
+	} else {
+		response.message = 'Asignatura no encontrada';
+	}
+
+	res.json(response);
 });
 
 //Eliminar usuario de una asignatura

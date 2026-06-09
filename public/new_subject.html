@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/new_subject.css">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Nueva Asignatura</title>
+    <script src="/js/new_subject.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -26,7 +27,7 @@
             </header>
 
             <div class="form-card">
-                <form action="/subject/new" method="post">
+                <form id="newSubject" onsubmit="newSubject(event)">
                     <fieldset>
                         <div class="form-field">
                             <label for="name">Nombre:</label>
