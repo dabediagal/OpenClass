@@ -41,10 +41,20 @@ router.get('/', (req, res) => {
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	}
+
+	const allSubjects = VirtualClass.getAllSubjects();
+	const mySubjects = allSubjects.filter((subject) => {
+        const esMiProfe = subject.teachers.includes(autenticatedUser.id);
+        const esMiAlumno = subject.students.includes(autenticatedUser.id);
+        
+        if (autenticatedUser.type === 'admin') return true;
+        return esMiProfe || esMiAlumno;
+    });
+
 	const name = autenticatedUser.name;
 	const isAdmin = autenticatedUser.type === 'admin';
-	const subjects = VirtualClass.getAllSubjects();
-	res.render('index', { subjects: subjects, userName: name, isAdmin: isAdmin });
+
+	res.render('index', { subjects: mySubjects, userName: name, isAdmin: isAdmin });
 });
 
 // Crear nuevo usuario
