@@ -11,11 +11,11 @@ import fs from 'node:fs/promises';
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 const UPLOADS_FOLDER = 'uploads/';
-const autenticatedUser = '1';
+const autenticatedUser = '';
 
 export default router;
 
-// Iniciar Sesion
+// Formulario Iniciar Sesion
 router.post('/user/login', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.getUserByEmail(req.body.email);
@@ -23,6 +23,7 @@ router.post('/user/login', (req, res) => {
 	if (!user) {
 		response.message = 'El email no está registrado.';
 		response.valid = false;
+		return res.json(response);
 	}
 
 	if (user.password === req.body.password) {
@@ -36,10 +37,15 @@ router.post('/user/login', (req, res) => {
 	res.json(response);
 });
 
+// Iniciar Sesión
+router.get('/login', (req, res) => {
+	res.sendFile(path.resolve('public/login.html'));
+});
+
 // Página principal
 router.get('/', (req, res) => {
 	if(!autenticatedUser){
-		res.redirect('/user/login');
+		res.redirect('/login');
 	}
 	const subjects = VirtualClass.getAllSubjects();
 	res.render('index', { subjects: subjects });
