@@ -2,6 +2,7 @@ async function changePassword(event){
     event.preventDefault();
 
     const formData = new FormData(event.target);
+    if (formData.get('newPassword') !== formData.get('confirm_password')) return;
     const response = await fetch(`/profile/password`, { //no se si la ruta será esta
 		method: 'POST',
 		body: new URLSearchParams(formData), //no queremos un new, queremos cambiar algo q ya se habia establecido antes 

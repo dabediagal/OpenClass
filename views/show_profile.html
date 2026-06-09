@@ -30,8 +30,12 @@
         <div class="password-card">
             <form id="change_password" onsubmit="changePassword(event)">
                 <label>Contraseña antigua: <input type="password" name="currentPassword"></label>
-                <label>Contraseña nueva: <input type="password" name="newPassword"></label>
+                <label for="password">Contraseña nueva: <input type="password" name="newPassword" id="password"></label>
+                <label for="password">Repite la contraseña:</label>
+                <input type="password" name="confirm_password" id="confirm_password">
+                <span id="password-message" style="font-size: 0.85rem; font-weight: 500; display: block; margin-top: 5px;"></span>
                 <input type="submit" value="Cambiar">
+                <script src="/js/confirm_password.js"></script>
             </form>
             <!--si sale bien, q salte la "alerta" de que ha salido bien, y si no
             pues que salte el error, como lo demas vaya-->
