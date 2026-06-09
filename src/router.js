@@ -83,6 +83,8 @@ router.get('/subject/:id', (req, res) => {
 	const nonTeachers = subject.getNonTeachers();
 	const nonStudents = subject.getNonStudents();
 	const name = autenticatedUser.name;
+	const isAdmin = autenticatedUser.type === 'admin';
+	const isAdminOrTeacher = autenticatedUser.type === 'teacher' || isAdmin;
 
 	res.render('show_subject', {
 		subject,
@@ -92,6 +94,8 @@ router.get('/subject/:id', (req, res) => {
 		nonStudents,
 		topics: Array.from(subject.topics.values()),
 		userName: name,
+		isAdmin,
+		isAdminOrTeacher
 	});
 });
 

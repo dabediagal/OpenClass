@@ -31,7 +31,12 @@
     <h2>Profesores</h2>
     <ul>
         {{#teachers}}
-            <li>{{name}} <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> </li> 
+            <li>
+                {{name}} 
+                {{#isAdmin}}
+                <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                {{/isAdmin}}
+            </li> 
         {{/teachers}}
     </ul>
     
@@ -39,6 +44,7 @@
         <p>Aún no hay profesores.</p>
     {{/teachers}}
 
+    {{#isAdmin}}
     {{#nonTeachers.length}}
         <form action="/subject/{{subject.id}}/linkUser" method="post">
             <fieldset>
@@ -59,6 +65,7 @@
             <p><i>No hay más profesores disponibles para añadir.</i></p>
         </fieldset>
     {{/nonTeachers.length}}
+    {{/isAdmin}}
     </section>
 
     <section class="students">
@@ -66,7 +73,12 @@
 
     <ul>
         {{#students}}
-            <li>{{name}} <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> </li>
+            <li>
+                {{name}} 
+                {{#isAdmin}}
+                <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                {{/isAdmin}}
+            </li>
         {{/students}}
     </ul>
     
@@ -75,6 +87,7 @@
         <p>Aún no hay alumnos.</p>
     {{/students}}
 
+    {{#isAdmin}}
     {{#nonStudents.length}}
         <form action="/subject/{{subject.id}}/linkUser" method="post">
             <fieldset>
@@ -95,6 +108,7 @@
             <p><i>No hay más alumnos disponibles para añadir.</i></p>
         </fieldset>
     {{/nonStudents.length}}
+    {{/isAdmin}}
     </section>
     </div>
 
@@ -109,7 +123,9 @@
                 <li>
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
                     {{#attachment}}<a href="/uploads/{{attachment}}">Ver PDF</a>{{/attachment}}
+                    {{#isAdminOrTeacher}}
                     <button onclick="deleteTopic('{{id}}')">Eliminar</button>
+                    {{/isAdminOrTeacher}}
                 </li>
             {{/topics}}
         </ul>
@@ -119,6 +135,7 @@
             <p>Aún no hay temas.</p>
         {{/topics.length}}
 
+        {{#isAdminOrTeacher}}
         <form id="newTopic" onsubmit="newTopic(event)">
             <fieldset>
                 <legend>Añadir tema:</legend>
@@ -129,6 +146,7 @@
                 <input type="submit" value="Añadir">
             </fieldset>
         </form>
+        {{/isAdminOrTeacher}}
     </section>
 
     </main>
