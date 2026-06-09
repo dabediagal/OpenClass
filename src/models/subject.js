@@ -2,12 +2,13 @@ import { User } from './user.js';
 import { VirtualClass } from './virtual_class.js';
 export class Subject {
 	static counter = 0;
-	constructor(name) {
+	constructor(name, description) {
 		Subject.counter++;
 		this.id = String(Subject.counter);
 		this.name = name;
 		this.teachers = []; //RECIBE IDS SÓLO
 		this.students = [];
+		this.description=description;
 	}
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS

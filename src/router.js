@@ -27,7 +27,7 @@ router.post('/user/new', (req, res) => {
 
 // Crear nueva asignatura
 router.post('/subject/new', (req, res) => {
-	const subject = new Subject(req.body.name);
+	const subject = new Subject(req.body.name, req.body.description);
 	VirtualClass.addSubject(subject);
 
 	res.json(subject);
