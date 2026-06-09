@@ -129,4 +129,12 @@ router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
     }
 
     res.json(response);
-});	
+});		
+
+// Iniciar Sesion
+router.post('/user/login', (req, res) => {
+	const user = VirtualClass.getUser()
+	VirtualClass.addUser(user);
+
+	res.json(user);
+});
