@@ -42,12 +42,16 @@
                     </div>
                 </div>
                 {{/subjects}}
+
+                {{#isAdmin}}
                 <a href="/new_subject.html" class="btn-add">+ Añadir asignatura</a>
+                {{/isAdmin}}
+
             </section>
 
             {{^subjects}}
             <div class="nosubjects">
-                <p>No hay asignaturas aún. ¡Crea la primera!</p>
+                <p>No hay asignaturas aún.</p>
             </div>
             {{/subjects}}
 
