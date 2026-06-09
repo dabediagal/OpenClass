@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 // Crear nuevo usuario
 router.post('/user/new', (req, res) => {
-	const user = new User(req.body.name, req.body.type);
+	const user = new User(req.body.name, req.body.type, req.body.email, req.body.password);
 	VirtualClass.addUser(user);
 
 	res.json(user);
