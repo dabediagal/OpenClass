@@ -1,5 +1,6 @@
 import { User } from './user.js';
 import { VirtualClass } from './virtual_class.js';
+import { Topic } from './topics.js';
 export class Subject {
 	static counter = 0;
 	constructor(name, description) {
@@ -8,6 +9,7 @@ export class Subject {
 		this.name = name;
 		this.teachers = []; //RECIBE IDS SÓLO
 		this.students = [];
+		this.topics=[]; //empiezan en 0 estos topics y luego se van añadiendo 
 		this.description=description;
 	}
 	getTeachers() {
@@ -56,5 +58,17 @@ export class Subject {
 		} else {
 			this.students = this.students.filter(studentId => studentId !== id);
 		}
+	}
+
+	addTopic(title, descripcion, order) {
+		const topic = new Topic(title, descripcion, order);
+		this.topics.push(topic);
+		return topic;
+	}
+
+	deleteTopic(id) {
+		const topic = this.topics.find(t => t.id === id);
+		this.topics = this.topics.filter(t => t.id !== id);
+		return topic;
 	}
 }
