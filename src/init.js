@@ -9,7 +9,7 @@ export function initVirtualClass() {
 	// Creamos Profesores de prueba
 	const profe1 = new User('Ada Lovelace', 'teacher', 'adalovelace@email.com', '1234');
 	const profe2 = new User('Alan Turing', 'teacher', 'alanturing@email.com', '1234');
-    const profe3 = new User('Dennis Ritchie', 'teacher', 'dennis.ritchie@email.com', '1234');
+	const profe3 = new User('Dennis Ritchie', 'teacher', 'dennis.ritchie@email.com', '1234');
 	const profe4 = new User('Linus Torvalds', 'teacher', 'linus.torvalds@email.com', '1234');
 	const profe5 = new User('Tim Berners-Lee', 'teacher', 'tim.berners@email.com', '1234');
 
@@ -17,7 +17,7 @@ export function initVirtualClass() {
 	const alumno1 = new User('Carlos Pérez', 'student', 'carlosperez@email.com', '1234');
 	const alumno2 = new User('Lucía Fernández', 'student', 'luciafernandez@email.com', '1234');
 	const alumno3 = new User('Mateo Gómez', 'student', 'mateogomez@email.com', '1234');
-    const alumno4 = new User('Elena Rodríguez', 'student', 'elena.rod@email.com', '1234');
+	const alumno4 = new User('Elena Rodríguez', 'student', 'elena.rod@email.com', '1234');
 	const alumno5 = new User('Alejandro Muñoz', 'student', 'ale.munoz@email.com', '1234');
 	const alumno6 = new User('Sofía Benítez', 'student', 'sofia.b@email.com', '1234');
 	const alumno7 = new User('Diego Martínez', 'student', 'diego.mtnz@email.com', '1234');
@@ -44,7 +44,6 @@ export function initVirtualClass() {
 	VirtualClass.addUser(alumno8);
 	VirtualClass.addUser(alumno9);
 	VirtualClass.addUser(alumno10);
-
 
 	// También creamos un par de asignaturas de prueba
 	const mates = new Subject('Matemáticas Avanzadas', 'Son mates avanzadas como bien pone ahí');
@@ -78,13 +77,62 @@ export function initVirtualClass() {
 		'Subir tu proyecto a producción rezando para que funcione a la primera (nunca pasa)',
 	);
 
+	// Programación en JavaScript
+	prog.addUser(profe2.id); // Alan Turing
+	prog.addUser(alumno1.id); // Carlos
+	prog.addUser(alumno2.id); // Lucía
+	prog.addUser(alumno3.id); // Mateo
+
+	// Desarrollo Web en Entorno Servidor
+	servidor.addUser(profe4.id); // Linus Torvalds
+	servidor.addUser(alumno1.id); // Carlos
+	servidor.addUser(alumno4.id); // Elena
+	servidor.addUser(alumno6.id); // Sofía
+
+	// Desarrollo Web en Entorno Cliente
+	cliente.addUser(profe2.id); // Alan Turing
+	cliente.addUser(alumno2.id); // Lucía
+	cliente.addUser(alumno5.id); // Alejandro
+	cliente.addUser(alumno7.id); // Diego
+
+	// Bases de Datos
+	bases.addUser(profe3.id); // Dennis Ritchie
+	bases.addUser(alumno3.id); // Mateo
+	bases.addUser(alumno8.id); // Alba
+	bases.addUser(alumno10.id); // Martina
+
+	// Lenguajes de Marcas
+	marcas.addUser(profe5.id); // Tim Berners-Lee
+	marcas.addUser(alumno1.id); // Carlos
+	marcas.addUser(alumno2.id); // Lucía
+	marcas.addUser(alumno9.id); // Javier
+
+	// Matemáticas Avanzadas
+	mates.addUser(profe1.id); // Ada Lovelace
+	mates.addUser(alumno4.id); // Elena
+	mates.addUser(alumno5.id); // Alejandro
+
+	// Entornos de Desarrollo
+	entornos.addUser(profe4.id); // Linus Torvalds
+	entornos.addUser(alumno6.id); // Sofía
+	entornos.addUser(alumno7.id); // Diego
+
+	// Sistemas Informáticos
+	sistemas.addUser(profe3.id); // Dennis Ritchie
+	sistemas.addUser(alumno8.id); // Alba
+	sistemas.addUser(alumno9.id); // Javier
+
+	// Despliegue de Aplicaciones Web
+	despliegue.addUser(profe5.id); // Tim Berners-Lee
+	despliegue.addUser(alumno10.id); // Martina
+
 	VirtualClass.addSubject(mates);
 	VirtualClass.addSubject(prog);
-    VirtualClass.addSubject(entornos);
-    VirtualClass.addSubject(bases);
-    VirtualClass.addSubject(marcas);
-    VirtualClass.addSubject(sistemas);
-    VirtualClass.addSubject(servidor);
-    VirtualClass.addSubject(cliente);
-    VirtualClass.addSubject(despliegue);
+	VirtualClass.addSubject(entornos);
+	VirtualClass.addSubject(bases);
+	VirtualClass.addSubject(marcas);
+	VirtualClass.addSubject(sistemas);
+	VirtualClass.addSubject(servidor);
+	VirtualClass.addSubject(cliente);
+	VirtualClass.addSubject(despliegue);
 }
