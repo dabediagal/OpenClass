@@ -11,11 +11,36 @@ import fs from 'node:fs/promises';
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 const UPLOADS_FOLDER = 'uploads/';
+const autenticatedUser = '1';
 
 export default router;
 
+// Iniciar Sesion
+router.post('/user/login', (req, res) => {
+	let response = { valid: false, message: '' };
+	const user = VirtualClass.getUserByEmail(req.body.email);
+	
+	if (!user) {
+		response.message = 'El email no está registrado.';
+		response.valid = false;
+	}
+
+	if (user.password === req.body.password) {
+		response.valid = true;
+		autenticatedUser = user.id;
+	} else {
+		response.message = 'Contraseña incorrecta.';
+		response.valid = false;
+	}
+
+	res.json(response);
+});
+
 // Página principal
 router.get('/', (req, res) => {
+	if(!autenticatedUser){
+		res.redirect('/user/login');
+	}
 	const subjects = VirtualClass.getAllSubjects();
 	res.render('index', { subjects: subjects });
 });
@@ -129,26 +154,6 @@ router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
 		response.message = 'El topic ha sido borrado correctamente';
 	} else {
 		response.message = 'File not found!';
-	}
-
-	res.json(response);
-});
-
-// Iniciar Sesion
-router.post('/user/login', (req, res) => {
-	let response = { valid: false, message: '' };
-	const user = VirtualClass.getUserByEmail(req.body.email);
-	
-	if (!user) {
-		response.message = 'El email no está registrado.';
-		response.valid = false;
-	}
-
-	if (user.password === req.body.password) {
-		response.valid = true;
-	} else {
-		response.message = 'Contraseña incorrecta.';
-		response.valid = false;
 	}
 
 	res.json(response);
