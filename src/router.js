@@ -7,11 +7,12 @@ import { Topic } from './models/topics.js';
 
 import multer from 'multer';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 const UPLOADS_FOLDER = 'uploads/';
-const autenticatedUser = '';
+let autenticatedUser = '';
 
 export default router;
 
@@ -45,7 +46,7 @@ router.get('/login', (req, res) => {
 // Página principal
 router.get('/', (req, res) => {
 	if(!autenticatedUser){
-		res.redirect('/login');
+		return res.redirect('/login');
 	}
 	const subjects = VirtualClass.getAllSubjects();
 	res.render('index', { subjects: subjects });
