@@ -8,6 +8,7 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 const router = express.Router();
+const upload=multer({dest:'uploads/'}); //este upload se usa para subir el pdf d topics
 
 export default router;
 
@@ -102,9 +103,10 @@ router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 });
 
 // Añadir topic a una asignatura
-router.post('/subject/:id/topic/new', (req, res) => {
+router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
+	const pdfName=req.file?.filename;
 	const subject = VirtualClass.getSubject(req.params.id);
-	subject.addTopic(req.body.title, req.body.descripcion, req.body.order);
+	subject.addTopic(req.body.title, req.body.descripcion, req.body.order,pdfName);
 
 	res.redirect(`/subject/${req.params.id}`);
 });
