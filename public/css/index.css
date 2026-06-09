@@ -57,7 +57,7 @@
 }
 
 /* Estilo para los enlaces transformados en botones */
-.btn-view, .btn-delete {
+.btn-view, button {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
@@ -75,11 +75,11 @@
     background-color: #e2e8f0;
 }
 
-.btn-delete {
+button{
     color: #ef4444; /* Rojo para eliminar */
 }
 
-.btn-delete:hover {
+button:hover {
     background-color: #fee2e2;
 }
 
