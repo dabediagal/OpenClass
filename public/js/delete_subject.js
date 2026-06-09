@@ -1,6 +1,6 @@
 async function deleteSubject(subjectId) {
-	const confirm = confirm('¿Estás seguro de que quieres eliminar esta asignatura?');
-	if (!confirm) {
+	const accept= confirm('¿Estás seguro de que quieres eliminar esta asignatura?');
+	if (!accept) {
 		return;
 	}
 	const response = await fetch(`/subject/${subjectId}/delete`);
