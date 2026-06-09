@@ -3,6 +3,7 @@ import express from 'express';
 import { Subject } from './models/subject.js';
 import { User } from './models/user.js';
 import { VirtualClass } from './models/virtual_class.js';
+import { Topic } from './models/topics.js';
 
 import multer from 'multer';
 import fs from 'node:fs/promises';
@@ -102,13 +103,16 @@ router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 	res.redirect(`/subject/${req.params.subjectId}`);
 });
 
-// Añadir topic a una asignatura
+// Añadir topic a una asignatura con AJAX
 router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
 	const pdfName = req.file?.filename;
 	const subject = VirtualClass.getSubject(req.params.id);
-	subject.addTopic(req.body.title, req.body.descripcion, req.body.order, pdfName);
-
-	res.redirect(`/subject/${req.params.id}`);
+	try {
+		subject.addTopic(req.body.title, req.body.descripcion, req.body.order, pdfName);
+		res.json({ valid: true, message: 'Tema añadido correctamente' });
+	} catch (e) {
+		res.json({ valid: false, message: e.message });
+	}
 });
 
 // Eliminar topic de una asignatura CON AJAX

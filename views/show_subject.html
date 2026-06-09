@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/show_subject.css">
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/delete_topic.js"></script>
+    <script src="/js/new_topic.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -117,7 +118,7 @@
             <p>Aún no hay temas.</p>
         {{/subject.topics.length}}
 
-        <form action="/subject/{{subject.id}}/topic/new" method="post" enctype="multipart/form-data">
+        <form id="newTopic" onsubmit="newTopic(event)">
             <fieldset>
                 <legend>Añadir tema:</legend>
                 <label>Título: <input type="text" name="title" required></label>
