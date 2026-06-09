@@ -20,8 +20,8 @@ export function initVirtualClass(){
     VirtualClass.addUser(alumno3);
     
     // También creamos un par de asignaturas de prueba
-    const mates = new Subject('Matemáticas Avanzadas');
-    const prog = new Subject('Programación en JavaScript');
+    const mates = new Subject('Matemáticas Avanzadas',"Son mates avanzadas como bien pone ahí");
+    const prog = new Subject('Programación en JavaScript',"No lo hagáis nunca");
     VirtualClass.addSubject(mates);
     VirtualClass.addSubject(prog);
 }
