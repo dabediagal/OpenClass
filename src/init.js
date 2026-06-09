@@ -4,13 +4,13 @@ import { Subject } from './models/subject.js';
 
 export function initVirtualClass(){
     // Creamos Profesores de prueba
-    const profe1 = new User('Ada Lovelace', 'teacher');
-    const profe2 = new User('Alan Turing', 'teacher');
+    const profe1 = new User('Ada Lovelace', 'teacher', 'adalovelace@email.com', '1234');
+    const profe2 = new User('Alan Turing', 'teacher', 'alanturing@email.com', '1234');
     
     // Creamos Alumnos de prueba
-    const alumno1 = new User('Carlos Pérez', 'student');
-    const alumno2 = new User('Lucía Fernández', 'student');
-    const alumno3 = new User('Mateo Gómez', 'student');
+    const alumno1 = new User('Carlos Pérez', 'student', 'carlosperez@email.com', '1234');
+    const alumno2 = new User('Lucía Fernández', 'student', 'luciafernandez@email.com', '1234');
+    const alumno3 = new User('Mateo Gómez', 'student', 'mateogomez@email.com', '1234');
     
     // Los añadimos a la clase virtual
     VirtualClass.addUser(profe1);
