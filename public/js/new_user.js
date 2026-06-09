@@ -8,8 +8,8 @@ async function newUser(event){
 	});
 
     if(response.ok){
-        const confirm = confirm('¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?');
-        if(confirm){
+        const accept = confirm('¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?');
+        if(accept){
             document.getElementById('newUser').reset();
         }else{
             window.location = `/users`;

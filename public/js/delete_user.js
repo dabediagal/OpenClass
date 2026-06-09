@@ -1,6 +1,6 @@
 async function deleteUser(userId) {
-	const confirm = confirm('¿Estás seguro de que quieres eliminar este usuario?');
-	if (!confirm) {
+	const accept = confirm('¿Estás seguro de que quieres eliminar este usuario?');
+	if (!accept) {
 		return;
 	}
 	const response = await fetch(`/user/${userId}/delete`);
