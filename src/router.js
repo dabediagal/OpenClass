@@ -180,3 +180,11 @@ router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
 
 	res.json(response);
 });
+
+router.post('/profile/password', (req, res) => {
+    if (autenticatedUser.password !== req.body.currentPassword) {
+        return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
+    }
+    autenticatedUser.password = req.body.newPassword;
+    res.json({ valid: true });
+});

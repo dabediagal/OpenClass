@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/show_profile.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/change_password.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -25,6 +26,15 @@
             <p class="user-type"><b>Tipo: </b> {{user.type}}</p>
             <p class="user-email"><b>Email: </b> {{user.email}}</p>
             <p class="user-id"><b>ID: </b> {{user.id}}</p>
+        </div>
+        <div class="password-card">
+            <form id="change_password" onsubmit="changePassword(event)">
+                <label>Contraseña antigua: <input type="text" name="currentPassword"></label>
+                <label>Contraseña nueva: <input type="text" name="newPassword"></label>
+                <input type="submit" value="Cambiar">
+            </form>
+            <!--si sale bien, q salte la "alerta" de que ha salido bien, y si no
+            pues que salte el error, como lo demas vaya-->
         </div>
     </main>
     </div>
