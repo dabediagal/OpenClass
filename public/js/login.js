@@ -8,7 +8,9 @@ async function login(event) {
 	});
     const result = await response.json();
 
-    if(){
-
+    if(result.valid){
+        window.location = '/';
+    } else {
+        alert(`Error: ${result.message}`);
     }
 }

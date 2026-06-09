@@ -53,4 +53,11 @@ export class VirtualClass {
 		VirtualClass.subjects.delete(id);
 		return subject;
 	}
+
+	static getUserByEmail(email){
+		const user = Array.from(VirtualClass.users.values()).find(
+			(user) => user.email === email,
+		);
+		return user;
+	}
 }
