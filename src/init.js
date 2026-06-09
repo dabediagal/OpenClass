@@ -16,6 +16,7 @@ export function initVirtualClass(){
     const alumno3 = new User('Mateo Gómez', 'student', 'mateogomez@email.com', '1234');
     
     // Los añadimos a la clase virtual
+    VirtualClass.addUser(admin);
     VirtualClass.addUser(profe1);
     VirtualClass.addUser(profe2);
     VirtualClass.addUser(alumno1);
