@@ -1,20 +1,19 @@
-async function changePassword(event){
-    event.preventDefault();
+async function changePassword(event) {
+	event.preventDefault();
 
-    const formData = new FormData(event.target);
-    if (formData.get('newPassword') !== formData.get('confirm_password')) return;
-    const response = await fetch(`/profile/password`, { //no se si la ruta será esta
+	const formData = new FormData(event.target);
+	if (formData.get('newPassword') !== formData.get('confirm_password')) return;
+	const response = await fetch(`/profile/password`, {
 		method: 'POST',
-		body: new URLSearchParams(formData), //no queremos un new, queremos cambiar algo q ya se habia establecido antes 
+		body: new URLSearchParams(formData)
 	});
 
-     const result = await response.json();
+	const result = await response.json();
 
-    if (result.valid) {
-        alert('¡La contraseña ha sido cambiada con éxito!');
-        window.location.reload();
-    } else {
-        alert(`Error: ${result.message}`);
-    }
+	if (result.valid) {
+		alert('¡La contraseña ha sido cambiada con éxito!');
+		document.getElementById('change_password').reset();
+	} else {
+		alert(`Error: ${result.message}`);
+	}
 }
-
