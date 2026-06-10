@@ -126,7 +126,7 @@
             {{#topics}}
                 <li>
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
-                    {{#attachment}}<a href="/uploads/{{attachment}}">Ver PDF</a>{{/attachment}}
+                    {{#attachment}}<a href="/uploads/{{attachment}}" target="_blank">Ver PDF</a>{{/attachment}}
                     {{#isAdminOrTeacher}}
                     <button onclick="deleteTopic('{{id}}')">Eliminar</button>
                     {{/isAdminOrTeacher}}
