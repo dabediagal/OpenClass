@@ -1,3 +1,5 @@
+let clearPasswordMessage = null;
+
 async function newUser(event) {
 	event.preventDefault();
 
@@ -16,15 +18,16 @@ async function newUser(event) {
 	const formData = new FormData(event.target);
 	const response = await fetch(`/user/new`, {
 		method: 'POST',
-		body: new URLSearchParams(formData),
+		body: new URLSearchParams(formData)
 	});
 
 	if (response.ok) {
 		const accept = confirm(
-			'¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?',
+			'¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?'
 		);
 		if (accept) {
 			document.getElementById('newUser').reset();
+			clearPasswordMessage?.();
 		} else {
 			window.location = `/users`;
 		}
@@ -34,28 +37,9 @@ async function newUser(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	const passwordInput = document.getElementById('password');
-	const confirmPasswordInput = document.getElementById('confirm_password');
-	const messageSpan = document.getElementById('password-message');
-
-	function validarContrasenas() {
-		const pass = passwordInput.value;
-		const confirmPass = confirmPasswordInput.value;
-
-		if (pass === '' || confirmPass === '') {
-			messageSpan.textContent = '';
-			return;
-		}
-
-		if (pass === confirmPass) {
-			messageSpan.textContent = '✓ Las contraseñas coinciden';
-			messageSpan.style.color = '#10b981';
-		} else {
-			messageSpan.textContent = '✗ Las contraseñas no coinciden';
-			messageSpan.style.color = '#ef4444';
-		}
-	}
-
-	passwordInput.addEventListener('input', validarContrasenas);
-	confirmPasswordInput.addEventListener('input', validarContrasenas);
+	clearPasswordMessage = setupPasswordMatchValidation(
+		'password',
+		'confirm_password',
+		'password-message'
+	)?.clearPasswordMessage;
 });
