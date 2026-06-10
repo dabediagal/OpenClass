@@ -36,26 +36,34 @@ const upload = multer({
 	}
 });
 
-const MEET_SERVER_URL = process.env.MEET_SERVER_URL || 'http://localhost:6080';
+const OV_MEET_SERVER_URL = process.env.OV_MEET_SERVER_URL || 'http://localhost:9080/meet';
+const OV_MEET_API_KEY = process.env.OV_MEET_API_KEY || 'meet-api-key';
 const UPLOADS_FOLDER = 'uploads/';
 let autenticatedUser = undefined;
 
-async function createRoomOnMeet(roomName) {
-	const response = await fetch(`${MEET_SERVER_URL}/room/new`, {
-		method: 'POST',
+async function httpRequest(method, path, body) {
+	const response = await fetch(`${OV_MEET_SERVER_URL}/api/v1/${path}`, {
+		method,
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'X-API-KEY': OV_MEET_API_KEY
 		},
-		body: JSON.stringify({ roomName })
+		body: body ? JSON.stringify(body) : undefined
 	});
-
 	const responseBody = await response.json();
-
 	if (!response.ok) {
-		throw new Error(responseBody.message || 'Error creando la sala de videoconferencia');
+		const error = new Error(responseBody.message || 'Failed to perform request to OpenVidu Meet API');
+		error.statusCode = response.status;
+		throw error;
 	}
+	return responseBody;
+}
 
-	return responseBody.room || responseBody;
+function handleApiError(res, error, message) {
+	console.error(`${message}: ${error.message}`);
+	const statusCode = error.statusCode || 500;
+	const errorMessage = error.statusCode ? error.message : message;
+	res.status(statusCode).json({ message: errorMessage });
 }
 
 export default router;
@@ -125,7 +133,7 @@ router.post('/subject/new', async (req, res) => {
 
 	try {
 		const roomName = `subject-${Date.now()}-${subjectName.replace(/[^a-zA-Z0-9_-]/g, '_')}`;
-		const room = await createRoomOnMeet(roomName);
+		const room = await httpRequest('POST', 'rooms', { roomName });
 		const subject = new Subject(subjectName, subjectDescription, room);
 		VirtualClass.addSubject(subject);
 
@@ -301,4 +309,28 @@ router.post('/profile/password', (req, res) => {
 	}
 	autenticatedUser.password = req.body.newPassword;
 	res.json({ valid: true });
+});
+
+// Crear sala de videoconferencia
+router.post('/rooms', async (req, res) => {
+	const { roomName } = req.body;
+	if (!roomName) {
+		return res.status(400).json({ message: "'roomName' is required" });
+	}
+	try {
+		const room = await httpRequest('POST', 'rooms', { roomName });
+		res.status(201).json({ message: `Room '${roomName}' created successfully`, room });
+	} catch (error) {
+		handleApiError(res, error, `Error creating room '${roomName}'`);
+	}
+});
+
+// Eliminar sala de videoconferencia
+router.delete('/rooms/:roomId', async (req, res) => {
+	try {
+		await httpRequest('DELETE', `rooms/${req.params.roomId}?withMeeting=force&withRecordings=force`);
+		res.status(200).json({ message: `Room '${req.params.roomId}' deleted successfully` });
+	} catch (error) {
+		handleApiError(res, error, `Error deleting room '${req.params.roomId}'`);
+	}
 });
