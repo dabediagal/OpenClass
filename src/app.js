@@ -11,7 +11,7 @@ app.use(express.static('./public'));
 app.use('/uploads', express.static('./uploads'));
 
 app.set('view engine', 'html');
-app.engine('html', mustacheExpress(), '.html');
+app.engine('html', mustacheExpress('./views/partials', '.html'));
 app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,5 +22,4 @@ app.use('/', router);
 
 app.listen(3000, () => console.log('Web ready in http://localhost:3000/'));
 
-//para ver los html reutilizables en las views
-app.engine('html', mustacheExpress('./views/partials', '.html'));
+
