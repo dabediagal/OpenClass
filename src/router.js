@@ -7,7 +7,6 @@ import { Topic } from './models/topics.js';
 
 import multer from 'multer';
 import fs from 'node:fs/promises';
-import path from 'node:path';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
@@ -43,17 +42,20 @@ router.get('/', (req, res) => {
 	}
 
 	const allSubjects = VirtualClass.getAllSubjects();
-	const mySubjects = allSubjects.filter((subject) => {
-        const esMiProfe = subject.teachers.includes(autenticatedUser.id);
-        const esMiAlumno = subject.students.includes(autenticatedUser.id);
-        
-        if (autenticatedUser.type === 'admin') return true;
-        return esMiProfe || esMiAlumno;
-    });
+	let mySubjects = allSubjects;
+
+	const isAdmin = autenticatedUser.type === 'admin';
+	if (!isAdmin) {
+		mySubjects = allSubjects.filter((subject) => {
+			if (autenticatedUser.type === 'teacher') {
+				return subject.teachers.includes(autenticatedUser.id);
+			}
+
+			return subject.students.includes(autenticatedUser.id);
+		});
+	}
 
 	const name = autenticatedUser.name;
-	const isAdmin = autenticatedUser.type === 'admin';
-
 	res.render('index', { subjects: mySubjects, userName: name, isAdmin: isAdmin });
 });
 
@@ -79,12 +81,18 @@ router.get('/subject/:id', (req, res) => {
 	// los teachers y students de una asignatura en concreto
 	const teachers = subject.getTeachers();
 	const students = subject.getStudents();
-	// todos los teachers y students que NO pertenecen a esa asignatura
-	const nonTeachers = subject.getNonTeachers();
-	const nonStudents = subject.getNonStudents();
+
 	const name = autenticatedUser.name;
 	const isAdmin = autenticatedUser.type === 'admin';
 	const isAdminOrTeacher = autenticatedUser.type === 'teacher' || isAdmin;
+
+	let nonTeachers = undefined;
+	let nonStudents = undefined;
+	if (isAdmin) {
+		// todos los teachers y students que NO pertenecen a esa asignatura
+		nonTeachers = subject.getNonTeachers();
+		nonStudents = subject.getNonStudents();
+	}
 
 	res.render('show_subject', {
 		subject,
@@ -95,18 +103,17 @@ router.get('/subject/:id', (req, res) => {
 		topics: Array.from(subject.topics.values()),
 		userName: name,
 		isAdmin,
-		isAdminOrTeacher
+		isAdminOrTeacher,
 	});
 });
 
 // Perfil del usuario autenticado
 router.get('/profile', (req, res) => {
-	if (!autenticatedUser){
+	if (!autenticatedUser) {
 		return res.redirect('/login.html');
-	}else{
-		res.render('show_profile', { user : autenticatedUser });
+	} else {
+		res.render('show_profile', { user: autenticatedUser });
 	}
-	
 });
 
 // Todos los usuarios
@@ -196,9 +203,9 @@ router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
 });
 
 router.post('/profile/password', (req, res) => {
-    if (autenticatedUser.password !== req.body.currentPassword) {
-        return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
-    }
-    autenticatedUser.password = req.body.newPassword;
-    res.json({ valid: true });
+	if (autenticatedUser.password !== req.body.currentPassword) {
+		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
+	}
+	autenticatedUser.password = req.body.newPassword;
+	res.json({ valid: true });
 });
