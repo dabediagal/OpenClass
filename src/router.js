@@ -10,9 +10,22 @@ import fs from 'node:fs/promises';
 
 const router = express.Router();
 
-// Configurar multer solo para PDFs
+// Configurar multer con almacenamiento personalizado para PDFs
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads/');
+	},
+	filename: (req, file, cb) => {
+		// Sanitizar el título para usar como nombre de archivo
+		const title = req.body.title.replace(/[^a-zA-Z0-9_-]/g, '_');
+		const order = req.body.order || '0';
+		const filename = `${order}_${title}.pdf`;
+		cb(null, filename);
+	}
+});
+
 const upload = multer({
-	dest: 'uploads/',
+	storage: storage,
 	fileFilter: (req, file, cb) => {
 		// Validar por MIME type
 		if (file.mimetype === 'application/pdf') {
