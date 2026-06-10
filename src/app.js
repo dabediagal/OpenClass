@@ -15,6 +15,7 @@ app.engine('html', mustacheExpress('./views/partials', '.html'));
 app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 initVirtualClass();
 

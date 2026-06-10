@@ -1,5 +1,3 @@
-import { VirtualClass } from './src/models/virtual_class.js';
-
 async function deleteUser(userId) {
 	const accept = confirm('¿Estás seguro de que quieres eliminar este usuario?');
 	if (!accept) {
@@ -16,14 +14,36 @@ async function deleteUser(userId) {
 	}
 }
 
-async function editUser(userId){
-	const teacher=document.getElementById('teacher');
-	const student=document.getElementById('student');
+async function editUser(userId) {
+	const response = await fetch(`/user/${userId}/edit`);
+	const user = await response.json();
 
-	const user=VirtualClass.getUser(userId);
-	if(user.type==='teacher'){
-		teacher.innerHTML='';
-	}else{
-		student.innerHTML='';
+	const card = document.querySelector(`[data-id="${userId}"]`);
+	card.innerHTML = `
+		<p><b>Id:</b> ${user.id}</p>
+		<p><label><b>Nombre:</b> <input type="text" id="edit-name-${userId}" value="${user.name}"></label></p>
+		<p><label><b>Email:</b> <input type="email" id="edit-email-${userId}" value="${user.email}"></label></p>
+		<p>
+			<button onclick="saveUser('${userId}')">Guardar</button>
+			<button onclick="window.location.reload()">Cancelar</button>
+		</p>
+	`;
+}
+
+async function saveUser(userId) {
+	const name = document.getElementById(`edit-name-${userId}`).value;
+	const email = document.getElementById(`edit-email-${userId}`).value;
+
+	const response = await fetch(`/user/${userId}/edit`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ name, email }),
+	});
+	const result = await response.json();
+
+	if (result.valid) {
+		window.location.reload();
+	} else {
+		alert(`Error: ${result.message}`);
 	}
 }

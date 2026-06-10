@@ -165,6 +165,23 @@ router.post('/subject/:id/linkUser', (req, res) => {
 	res.json({ valid: true });
 });
 
+// Obtener usuario por id
+router.get('/user/:id/edit', (req, res) => {
+	const user = VirtualClass.getUser(req.params.id);
+	if (!user) return res.json({ valid: false });
+	res.json(user);
+});
+
+// Editar usuario
+router.post('/user/:id/edit', (req, res) => {
+	const user = VirtualClass.getUser(req.params.id);
+	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
+
+	user.name = req.body.name;
+	user.email = req.body.email;
+	res.json({ valid: true });
+});
+
 // Eliminar usuario
 router.get('/user/:id/delete', (req, res) => {
 	let response = { valid: false, message: '' };

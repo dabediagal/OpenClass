@@ -35,12 +35,12 @@
             <section class="teachers">
                 <h2>Profesores</h2>
                 {{#teachers}}
-                    <div class="teacher">
+                    <div class="teacher" data-id="{{id}}">
                         <p><b>Id: </b> {{id}}</p>
                         <p><b>Nombre: </b> {{name}}</p>
                         <p><b>Email:</b> {{email}}</p>
                         <p><button onclick="deleteUser({{id}})">Eliminar</button></p>
-                        <p><button onclick="editUser({{id}})">Editar</button></p>
+                        <p><button onclick="editUser('{{id}}')">Editar</button></p>
                     </div>
                 {{/teachers}}
                 {{^teachers}}
@@ -51,12 +51,12 @@
             <section class="students">
                 <h2>Alumnos</h2>
                 {{#students}}
-                    <div class="student">
+                    <div class="student" data-id="{{id}}">
                         <p><b>Id: </b>{{id}} </p>
-                        <p><b>Nombre: </b>{{name}}</p> 
+                        <p><b>Nombre: </b>{{name}}</p>
                         <p><b>Email:</b> {{email}}</p>
                         <p><button onclick="deleteUser({{id}})">Eliminar</button></p>
-                        <p><button onclick="editUser({{id}})">Editar</button></p>
+                        <p><button onclick="editUser('{{id}}')">Editar</button></p>
                     </div>
                 {{/students}}
                 {{^students}}
