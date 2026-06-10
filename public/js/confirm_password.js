@@ -6,8 +6,8 @@ function validarContrasenas() {
 	const pass = passwordInput.value;
 	const confirmPass = confirmPasswordInput.value;
 
-	// Si ambos campos están vacíos, no mostramos nada
-	if (pass === '' && confirmPass === '') {
+	// Si algún campo está vacío, no mostramos nada
+	if (pass === '' || confirmPass === '') {
 		messageSpan.textContent = '';
 		return;
 	}
