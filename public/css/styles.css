@@ -1,3 +1,5 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
 * {
     margin: 0px;
     padding: 0px;
@@ -82,5 +84,34 @@ body {
 .sidebar-menu .btn-return-sidebar:hover {
     background-color: #6E8649; /* Reseda Green: Se aclara elegantemente al pasar el cursor */
     color: #0D330E; /* Cambia a texto oscuro para mantener legibilidad con el fondo claro */
+}
+
+/* Fila de perfil + logout */
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profile-row .profile-icon {
+    flex: 1;
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-logout:hover {
+    background-color: #7f1d1d;
+    color: #fca5a5;
 }
 

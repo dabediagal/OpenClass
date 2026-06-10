@@ -133,6 +133,12 @@ router.get('/subject/:id', (req, res) => {
 	});
 });
 
+// Cerrar sesión
+router.get('/logout', (req, res) => {
+	autenticatedUser = '';
+	res.redirect('/login.html');
+});
+
 // Perfil del usuario autenticado
 router.get('/profile', (req, res) => {
 	if (!autenticatedUser) {
