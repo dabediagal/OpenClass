@@ -4,7 +4,7 @@ import { Subject } from './models/subject.js';
 
 export function initVirtualClass() {
 	// Creamos al admin
-	const admin = new User('Admin', 'admin', 'admin', '1234');
+	const admin = new User('Admin', 'admin', 'admin@email.com', '1234');
 
 	// Creamos Profesores de prueba
 	const profe1 = new User('Ada Lovelace', 'teacher', 'adalovelace@email.com', '1234');

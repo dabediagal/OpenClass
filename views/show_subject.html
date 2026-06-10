@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/delete_topic.js"></script>
     <script src="/js/new_topic.js"></script>
+    <script src="/js/link_user.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -49,7 +50,7 @@
 
     {{#isAdmin}}
     {{#nonTeachers.length}}
-        <form action="/subject/{{subject.id}}/linkUser" method="post">
+        <form id="linkUser" onsubmit="linkUser(event)" >
             <fieldset>
                 <legend>Añade un Profesor:</legend>
                 <select name="user">
@@ -92,7 +93,7 @@
 
     {{#isAdmin}}
     {{#nonStudents.length}}
-        <form action="/subject/{{subject.id}}/linkUser" method="post">
+        <form id="linkUserStudent" onsubmit="linkUser(event)">
             <fieldset>
                 <legend>Añade un Alumno:</legend>
                 <select name="user">

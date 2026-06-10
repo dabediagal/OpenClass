@@ -130,7 +130,7 @@ router.post('/subject/:id/linkUser', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.id);
 	subject.addUser(req.body.user);
 
-	res.redirect(`/subject/${req.params.id}`);
+	res.json({ valid: true });
 });
 
 // Eliminar usuario
