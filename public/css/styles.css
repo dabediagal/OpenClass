@@ -14,6 +14,7 @@ body {
 .app-container {
     display: flex;
     min-height: 100vh;
+    margin-left: 260px;
 }
 
 /* --- MENÚ LATERAL (SIDEBAR) --- */
@@ -24,6 +25,11 @@ body {
     display: flex;
     flex-direction: column;
     padding: 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .sidebar-brand h2 {
@@ -57,9 +63,16 @@ body {
     color: #ffffff; /* Letras totalmente blancas al activarse */
 }
 
+/* Agrupa volver + profile al fondo del sidebar */
+.sidebar-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 /* Botón llamativo dentro del menú (Volver) */
 .sidebar-menu .btn-return-sidebar {
-    margin-top: auto;
     background-color: #477023; /* Fern Green: Un verde más vivo para que parezca un botón de acción */
     color: white;
     text-align: center;

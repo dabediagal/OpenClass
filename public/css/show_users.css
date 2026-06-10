@@ -1,4 +1,11 @@
 
+/* --- HEADER CON TÍTULO Y BOTÓN --- */
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* --- CONTENIDO PRINCIPAL --- */
 .main-content {
     flex: 1;
@@ -19,11 +26,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-}
-
-/* El enlace "Añadir usuarios" dentro del grid ocupa las dos columnas */
-.sections-grid > a {
-    grid-column: 1 / -1;
 }
 
 /* --- CAJITAS (Profesores / Alumnos) --- */

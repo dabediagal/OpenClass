@@ -18,14 +18,18 @@
             </div>
             <nav class="sidebar-menu">
                 <a href="/users" class="active">Gestionar usuarios</a>
-                <a href="/" class="btn-return-sidebar">Volver</a>
-                {{> profile}}
+
+                <div class="sidebar-bottom">
+                    <a href="/" class="btn-return-sidebar">Volver</a>
+                    {{> profile}}
+                </div>
             </nav>
         </aside>
 
         <main class="main-content">
             <header class="title">
                 <h1>Usuarios</h1>
+                <a href="/new_user.html" class="btn-add-users">+ Añadir usuarios</a>
             </header>
             <div class="sections-grid">
             <section class="teachers">
@@ -57,7 +61,6 @@
                     <p>Aún no hay alumnos</p>
                 {{/students}}
             </section>
-            <a href="/new_user.html" class="btn-add-users">+ Añadir usuarios</a>
             </div>
         </main>
 

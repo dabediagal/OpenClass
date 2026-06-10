@@ -36,7 +36,8 @@
     color: #334155;
 }
 
-.topics li a {
+.topics li a,
+.topics li button {
     text-decoration: none;
     color: #ef4444;
     font-size: 0.85rem;
@@ -44,9 +45,14 @@
     padding: 4px 8px;
     border-radius: 6px;
     transition: background-color 0.2s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.topics li a:hover {
+.topics li a:hover,
+.topics li button:hover {
     background-color: #fee2e2;
 }
 
