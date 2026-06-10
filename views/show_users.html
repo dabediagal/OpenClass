@@ -39,7 +39,8 @@
                         <p><b>Id: </b> {{id}}</p>
                         <p><b>Nombre: </b> {{name}}</p>
                         <p><b>Email:</b> {{email}}</p>
-                        <p><button onclick="deleteUser({{id}})">Eliminar</a></p>
+                        <p><button onclick="deleteUser({{id}})">Eliminar</button></p>
+                        <p><button onclick="editUser({{id}})">Editar</button></p>
                     </div>
                 {{/teachers}}
                 {{^teachers}}
@@ -54,7 +55,8 @@
                         <p><b>Id: </b>{{id}} </p>
                         <p><b>Nombre: </b>{{name}}</p> 
                         <p><b>Email:</b> {{email}}</p>
-                        <p><button onclick="deleteUser({{id}})">Eliminar</a></p>
+                        <p><button onclick="deleteUser({{id}})">Eliminar</button></p>
+                        <p><button onclick="editUser({{id}})">Editar</button></p>
                     </div>
                 {{/students}}
                 {{^students}}
