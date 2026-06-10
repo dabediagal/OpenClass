@@ -1,3 +1,5 @@
+import { deleteRoom } from '../room.js';
+
 export class VirtualClass {
 	static subjects = new Map();
 	static users = new Map();
@@ -45,19 +47,28 @@ export class VirtualClass {
 		return user;
 	}
 
-	static deleteSubject(id) {
+	static async deleteSubject(id) {
 		const subject = VirtualClass.getSubject(id);
 		if (!subject) {
 			return undefined;
 		}
 		VirtualClass.subjects.delete(id);
+
+		// Eliminar la sala de videoconferencia asociada
+		try {
+			await deleteRoom(subject.room.roomId);
+		} catch (error) {
+			console.error(
+				'No se ha podido eliminar la sala de videoconferencia asociada a la asignatura',
+				error
+			);
+		}
+
 		return subject;
 	}
 
-	static getUserByEmail(email){
-		const user = Array.from(VirtualClass.users.values()).find(
-			(user) => user.email === email,
-		);
+	static getUserByEmail(email) {
+		const user = Array.from(VirtualClass.users.values()).find((user) => user.email === email);
 		return user;
 	}
 }

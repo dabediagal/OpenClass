@@ -1,9 +1,12 @@
 import { User } from './user.js';
 import { VirtualClass } from './virtual_class.js';
 import { Topic } from './topics.js';
+import { createRoom } from '../room.js';
+
 export class Subject {
 	static counter = 0;
-	constructor(name, description, room = null) {
+
+	constructor(name, description) {
 		Subject.counter++;
 		this.id = String(Subject.counter);
 		this.name = name;
@@ -11,8 +14,15 @@ export class Subject {
 		this.students = [];
 		this.topics = new Map();
 		this.description = description;
-		this.room = room; // room puede contener moderatorUrl y speakerUrl
+		this.room = null;
 	}
+
+	static async create(name, description) {
+		const subject = new Subject(name, description);
+		subject.room = await createRoom(name);
+		return subject;
+	}
+
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS
 		for (let teacher of this.teachers) {
@@ -20,6 +30,7 @@ export class Subject {
 		}
 		return teachersFullInfo;
 	}
+
 	getStudents() {
 		let studentsFullInfo = [];
 		for (let student of this.students) {

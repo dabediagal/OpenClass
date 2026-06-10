@@ -2,7 +2,7 @@ import { VirtualClass } from './models/virtual_class.js';
 import { User } from './models/user.js';
 import { Subject } from './models/subject.js';
 
-export function initVirtualClass() {
+export async function initVirtualClass() {
 	// Creamos al admin
 	const admin = new User('Admin', 'admin', 'admin@email.com', '1234');
 
@@ -46,35 +46,38 @@ export function initVirtualClass() {
 	VirtualClass.addUser(alumno10);
 
 	// También creamos un par de asignaturas de prueba
-	const mates = new Subject('Matemáticas Avanzadas', 'Son mates avanzadas como bien pone ahí');
-	const prog = new Subject('Programación en JavaScript', 'No lo hagáis nunca');
-	const entornos = new Subject(
+	const mates = await Subject.create(
+		'Matemáticas Avanzadas',
+		'Son mates avanzadas como bien pone ahí'
+	);
+	const prog = await Subject.create('Programación en JavaScript', 'No lo hagáis nunca');
+	const entornos = await Subject.create(
 		'Entornos de Desarrollo',
-		'Donde aprendes a usar Git antes de que un conflicto de ramas te arruine la existencia',
+		'Donde aprendes a usar Git antes de que un conflicto de ramas te arruine la existencia'
 	);
-	const bases = new Subject(
+	const bases = await Subject.create(
 		'Bases de Datos',
-		'Mucho SELECT, mucho JOIN, pero al final siempre se te olvida poner el WHERE en el DELETE',
+		'Mucho SELECT, mucho JOIN, pero al final siempre se te olvida poner el WHERE en el DELETE'
 	);
-	const marcas = new Subject(
+	const marcas = await Subject.create(
 		'Lenguajes de Marcas',
-		'Hacer cajitas de colores con CSS Grid hasta que todo se rompa por 1 píxel',
+		'Hacer cajitas de colores con CSS Grid hasta que todo se rompa por 1 píxel'
 	);
-	const sistemas = new Subject(
+	const sistemas = await Subject.create(
 		'Sistemas Informáticos',
-		'Aprender comandos de Linux de memoria para acabar usando la interfaz gráfica',
+		'Aprender comandos de Linux de memoria para acabar usando la interfaz gráfica'
 	);
-	const servidor = new Subject(
+	const servidor = await Subject.create(
 		'Desarrollo Web en Entorno Servidor',
-		'Donde Node.js y Express se convierten en tus mejores amigos (o en tus peores pesadillas)',
+		'Donde Node.js y Express se convierten en tus mejores amigos (o en tus peores pesadillas)'
 	);
-	const cliente = new Subject(
+	const cliente = await Subject.create(
 		'Desarrollo Web en Entorno Cliente',
-		'JavaScript otra vez, porque una sola asignatura no era suficiente castigo',
+		'JavaScript otra vez, porque una sola asignatura no era suficiente castigo'
 	);
-	const despliegue = new Subject(
+	const despliegue = await Subject.create(
 		'Despliegue de Aplicaciones Web',
-		'Subir tu proyecto a producción rezando para que funcione a la primera (nunca pasa)',
+		'Subir tu proyecto a producción rezando para que funcione a la primera (nunca pasa)'
 	);
 
 	// Programación en JavaScript
