@@ -9,7 +9,20 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/' });
+
+// Configurar multer solo para PDFs
+const upload = multer({
+	dest: 'uploads/',
+	fileFilter: (req, file, cb) => {
+		// Validar por MIME type
+		if (file.mimetype === 'application/pdf') {
+			cb(null, true);
+		} else {
+			cb(new Error('Solo se permiten archivos PDF'));
+		}
+	}
+});
+
 const UPLOADS_FOLDER = 'uploads/';
 let autenticatedUser = '';
 
@@ -173,6 +186,11 @@ router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 
 // Añadir topic a una asignatura con AJAX
 router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
+	// Validar que si hay archivo, sea PDF
+	if (req.file && req.file.mimetype !== 'application/pdf') {
+		return res.json({ valid: false, message: 'Solo se permiten archivos PDF' });
+	}
+
 	const pdfName = req.file?.filename;
 	const subject = VirtualClass.getSubject(req.params.id);
 	try {
