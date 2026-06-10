@@ -1,35 +1,21 @@
-async function newUser(event) {
+async function changePassword(event) {
 	event.preventDefault();
 
-	//confirmacion de contraseña
-	const pass = document.getElementById('password').value;
-	const confirmPass = document.getElementById('confirm_password').value;
-
-	if (pass === '' || pass !== confirmPass) {
-		event.preventDefault();
-		alert('Por favor, asegúrate de que las contraseñas coinciden antes de continuar.');
-
-		return;
-	}
-
-	//seguimos
 	const formData = new FormData(event.target);
-	const response = await fetch(`/user/new`, {
+	if (formData.get('newPassword') !== formData.get('confirm_password')) return;
+	const response = await fetch(`/profile/password`, {
 		method: 'POST',
-		body: new URLSearchParams(formData),
+		body: new URLSearchParams(formData)
 	});
 
-	if (response.ok) {
-		const accept = confirm(
-			'¡El usuario ha sido creado con exito! ¿Quieres seguir creando usuarios?',
-		);
-		if (accept) {
-			document.getElementById('newUser').reset();
-		} else {
-			window.location = `/users`;
-		}
+	const result = await response.json();
+
+	if (result.valid) {
+		alert('¡La contraseña ha sido cambiada con éxito!');
+		document.getElementById('change_password').reset();
+		messageSpan.textContent = '';
 	} else {
-		alert('Ha ocurrido un error.');
+		alert(`Error: ${result.message}`);
 	}
 }
 
