@@ -36,8 +36,27 @@ const upload = multer({
 	}
 });
 
+const MEET_SERVER_URL = process.env.MEET_SERVER_URL || 'http://localhost:6080';
 const UPLOADS_FOLDER = 'uploads/';
-let autenticatedUser = '';
+let autenticatedUser = undefined;
+
+async function createRoomOnMeet(roomName) {
+	const response = await fetch(`${MEET_SERVER_URL}/room/new`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ roomName })
+	});
+
+	const responseBody = await response.json();
+
+	if (!response.ok) {
+		throw new Error(responseBody.message || 'Error creando la sala de videoconferencia');
+	}
+
+	return responseBody.room || responseBody;
+}
 
 export default router;
 
@@ -94,11 +113,31 @@ router.post('/user/new', (req, res) => {
 });
 
 // Crear nueva asignatura
-router.post('/subject/new', (req, res) => {
-	const subject = new Subject(req.body.name, req.body.description);
-	VirtualClass.addSubject(subject);
+router.post('/subject/new', async (req, res) => {
+	const subjectName = req.body.name?.trim();
+	const subjectDescription = req.body.description?.trim();
 
-	res.json(subject);
+	if (!subjectName) {
+		return res
+			.status(400)
+			.json({ valid: false, message: 'El nombre de la asignatura es obligatorio' });
+	}
+
+	try {
+		const roomName = `subject-${Date.now()}-${subjectName.replace(/[^a-zA-Z0-9_-]/g, '_')}`;
+		const room = await createRoomOnMeet(roomName);
+		const subject = new Subject(subjectName, subjectDescription, room);
+		VirtualClass.addSubject(subject);
+
+		res.json(subject);
+	} catch (error) {
+		console.error('Error creating subject room:', error);
+		res.status(500).json({
+			valid: false,
+			message:
+				error.message || 'No se pudo crear la sala de videoconferencia para la asignatura'
+		});
+	}
 });
 
 // Mostrar una asignatura
@@ -129,13 +168,13 @@ router.get('/subject/:id', (req, res) => {
 		topics: Array.from(subject.topics.values()),
 		userName: name,
 		isAdmin,
-		isAdminOrTeacher,
+		isAdminOrTeacher
 	});
 });
 
 // Cerrar sesión
 router.get('/logout', (req, res) => {
-	autenticatedUser = '';
+	autenticatedUser = undefined;
 	res.redirect('/login.html');
 });
 

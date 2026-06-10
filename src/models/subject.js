@@ -3,15 +3,15 @@ import { VirtualClass } from './virtual_class.js';
 import { Topic } from './topics.js';
 export class Subject {
 	static counter = 0;
-	constructor(name, description) {
+	constructor(name, description, room = null) {
 		Subject.counter++;
 		this.id = String(Subject.counter);
 		this.name = name;
 		this.teachers = []; //RECIBE IDS SÓLO
 		this.students = [];
 		this.topics = new Map();
-		this.description=description;
-		this.room=null; //de momento no hacemos nada con el room
+		this.description = description;
+		this.room = room; // room puede contener moderatorUrl y speakerUrl
 	}
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS
@@ -52,12 +52,12 @@ export class Subject {
 		return nonStudents;
 	}
 
-	deleteUser(id){
+	deleteUser(id) {
 		let user = VirtualClass.getUser(id);
 		if (user.type === 'teacher') {
-			this.teachers = this.teachers.filter(teacherId => teacherId !== id);
+			this.teachers = this.teachers.filter((teacherId) => teacherId !== id);
 		} else {
-			this.students = this.students.filter(studentId => studentId !== id);
+			this.students = this.students.filter((studentId) => studentId !== id);
 		}
 	}
 
@@ -79,7 +79,7 @@ export class Subject {
 		const deletedOrder = topic.order;
 		this.topics.delete(id);
 		for (const t of this.topics.values()) {
-			if (t.order > deletedOrder){
+			if (t.order > deletedOrder) {
 				t.order--;
 			}
 		}

@@ -28,6 +28,18 @@
     <h1>{{subject.name}}</h1>
     {{#subject.description}}<p class="subject-description">{{subject.description}}</p>{{/subject.description}}
 
+    {{#subject.room}}
+    <section class="room-links">
+        <h2>Sala de videoconferencia</h2>
+        {{#subject.room.moderatorUrl}}
+            <p>Moderador: <a href="{{subject.room.moderatorUrl}}" target="_blank">Entrar como moderador</a></p>
+        {{/subject.room.moderatorUrl}}
+        {{#subject.room.speakerUrl}}
+            <p>Speaker: <a href="{{subject.room.speakerUrl}}" target="_blank">Entrar como speaker</a></p>
+        {{/subject.room.speakerUrl}}
+    </section>
+    {{/subject.room}}
+
     <div class="sections-grid">
     <section class="teachers">
     <h2>Profesores</h2>
