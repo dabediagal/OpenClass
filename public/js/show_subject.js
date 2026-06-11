@@ -139,12 +139,11 @@ async function linkUser(event) {
 }
 
 async function deleteUser(subjectId, userId) {
-	const response = await fetch(`/${subjectId}/user/${userId}/delete`);
+	const response = await fetch(`/subjects/${subjectId}/user/${userId}/delete`);
 	const result = await response.json();
 
 	if (result.valid) {
-		alert(result.message);
-		window.location = '/users';
+		window.location.reload();
 	} else {
 		alert(`Error: ${result.message}`);
 	}
