@@ -31,13 +31,13 @@
     {{#subject.room}}
     <section class="room-links">
         {{#isAdminOrTeacher}}
-            <a class="room-button room-button--moderator" href="{{subject.room.moderatorUrl}}" target="_blank">
+            <a class="room-button room-button--moderator" href="{{subject.room.moderatorUrl}}&participant-name={{userName}}" target="_blank">
                 <i class="fas fa-chalkboard-user"></i>
                 <span class="room-button__text">Entrar como Profesor</span>
             </a>
         {{/isAdminOrTeacher}}
         {{#isAdminOrStudent}}
-            <a class="room-button room-button--speaker" href="{{subject.room.speakerUrl}}" target="_blank">
+            <a class="room-button room-button--speaker" href="{{subject.room.speakerUrl}}&participant-name={{userName}}" target="_blank">
                 <i class="fas fa-user"></i>
                 <span class="room-button__text">Entrar como Estudiante</span>
             </a>
