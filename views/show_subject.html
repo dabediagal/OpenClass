@@ -18,7 +18,7 @@
                 <a href="#" class="active">Asignatura</a>
 
                 <div class="sidebar-bottom">
-                    <a href="/" class="btn-return-sidebar">Volver</a>
+                    <a href="/subjects" class="btn-return-sidebar">Volver</a>
                     {{> profile}}
                 </div>
             </nav>
@@ -53,7 +53,7 @@
             <li>
                 {{name}} 
                 {{#isAdmin}}
-                <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                <a href="/subjects/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
                 {{/isAdmin}}
             </li> 
         {{/teachers}}
@@ -95,7 +95,7 @@
             <li>
                 {{name}} 
                 {{#isAdmin}}
-                <a href="/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                <a href="/subjects/subject/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
                 {{/isAdmin}}
             </li>
         {{/students}}

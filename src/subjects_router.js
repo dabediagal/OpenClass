@@ -42,7 +42,7 @@ let autenticatedUser = undefined;
 
 
 // Página principal
-subjects_router.get('/subjects', (req, res) => {
+subjects_router.get('/', (req, res) => {
     if (!autenticatedUser) {
         return res.redirect('/login.html');
     }
