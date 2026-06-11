@@ -18,12 +18,6 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-try {
-	await initVirtualClass();
-} catch (error) {
-	console.error('Error initializing virtual class:', error);
-}
-
 // Root: redirect to subjects router (mounted at /subjects)
 app.get('/', (req, res) => {
 	res.redirect('/subjects');
@@ -32,4 +26,11 @@ app.get('/', (req, res) => {
 app.use('/users', users_router);
 app.use('/subjects', subjects_router);
 
-app.listen(3000, () => console.log('Web ready in http://localhost:3000/'));
+(async () => {
+	try {
+		await initVirtualClass();
+		app.listen(3000, () => console.log('Web ready in http://localhost:3000/'));
+	} catch (error) {
+		console.error('Error initializing virtual class:', error);
+	}
+})();

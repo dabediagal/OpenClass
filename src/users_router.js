@@ -1,11 +1,10 @@
 import express from 'express';
 import { User } from './models/user.js';
 import { VirtualClass } from './models/virtual_class.js';
+import { getAuthenticatedUser, setAuthenticatedUser, clearAuthenticatedUser } from './auth.js';
 
 const users_router = express.Router();
 export default users_router;
-
-let autenticatedUser = undefined;
 
 // Formulario Iniciar Sesion
 users_router.post('/login', (req, res) => {
@@ -19,7 +18,7 @@ users_router.post('/login', (req, res) => {
 
 	if (user.password === req.body.password) {
 		response.valid = true;
-		autenticatedUser = user;
+		setAuthenticatedUser(user);
 	} else {
 		response.message = 'Contraseña incorrecta.';
 	}
@@ -52,12 +51,13 @@ users_router.post('/new', (req, res) => {
 
 // Cerrar sesión
 users_router.get('/logout', (req, res) => {
-	autenticatedUser = undefined;
+	clearAuthenticatedUser();
 	res.redirect('/login.html');
 });
 
 // Perfil del usuario autenticado
 users_router.get('/profile', (req, res) => {
+	const autenticatedUser = getAuthenticatedUser();
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	} else {
@@ -69,6 +69,7 @@ users_router.get('/profile', (req, res) => {
 users_router.get('/', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
+	const autenticatedUser = getAuthenticatedUser();
 	const name = autenticatedUser.name;
 
 	res.render('show_users', { students: students, teachers: teachers, userName: name });
@@ -119,6 +120,7 @@ users_router.get('/:id/delete', (req, res) => {
 
 // Verificar contraseña
 users_router.post('/profile/password', (req, res) => {
+	const autenticatedUser = getAuthenticatedUser();
 	if (autenticatedUser.password !== req.body.currentPassword) {
 		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
 	}

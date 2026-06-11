@@ -4,6 +4,7 @@ import { Subject } from './models/subject.js';
 import { User } from './models/user.js';
 import { VirtualClass } from './models/virtual_class.js';
 import { Topic } from './models/topics.js';
+import { getAuthenticatedUser } from './auth.js';
 
 import multer from 'multer';
 import fs from 'node:fs/promises';
@@ -38,11 +39,11 @@ const upload = multer({
 });
 
 const UPLOADS_FOLDER = 'uploads/';
-let autenticatedUser = undefined;
 
 
 // Página principal
 subjects_router.get('/', (req, res) => {
+    const autenticatedUser = getAuthenticatedUser();
     if (!autenticatedUser) {
         return res.redirect('/login.html');
     }
@@ -93,6 +94,7 @@ subjects_router.post('/subject/new', async (req, res) => {
 
 // Mostrar una asignatura
 subjects_router.get('/subject/:id', (req, res) => {
+    const autenticatedUser = getAuthenticatedUser();
     if (!autenticatedUser) {
         return res.redirect('/login.html');
     }
