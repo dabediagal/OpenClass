@@ -129,6 +129,7 @@ router.get('/subject/:id', (req, res) => {
 	const name = autenticatedUser.name;
 	const isAdmin = autenticatedUser.type === 'admin';
 	const isAdminOrTeacher = autenticatedUser.type === 'teacher' || isAdmin;
+	const isAdminOrStudent = autenticatedUser.type === 'student' || isAdmin;
 
 	let nonTeachers = undefined;
 	let nonStudents = undefined;
@@ -147,7 +148,8 @@ router.get('/subject/:id', (req, res) => {
 		topics: Array.from(subject.topics.values()),
 		userName: name,
 		isAdmin,
-		isAdminOrTeacher
+		isAdminOrTeacher,
+		isAdminOrStudent
 	});
 });
 

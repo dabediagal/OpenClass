@@ -30,13 +30,18 @@
 
     {{#subject.room}}
     <section class="room-links">
-        <h2>Sala de videoconferencia</h2>
-        {{#subject.room.moderatorUrl}}
-            <p>Moderador: <a href="{{subject.room.moderatorUrl}}" target="_blank">Entrar como moderador</a></p>
-        {{/subject.room.moderatorUrl}}
-        {{#subject.room.speakerUrl}}
-            <p>Speaker: <a href="{{subject.room.speakerUrl}}" target="_blank">Entrar como speaker</a></p>
-        {{/subject.room.speakerUrl}}
+        {{#isAdminOrTeacher}}
+            <a class="room-button room-button--moderator" href="{{subject.room.moderatorUrl}}" target="_blank">
+                <i class="fas fa-chalkboard-user"></i>
+                <span class="room-button__text">Entrar como Profesor</span>
+            </a>
+        {{/isAdminOrTeacher}}
+        {{#isAdminOrStudent}}
+            <a class="room-button room-button--speaker" href="{{subject.room.speakerUrl}}" target="_blank">
+                <i class="fas fa-user"></i>
+                <span class="room-button__text">Entrar como Estudiante</span>
+            </a>
+        {{/isAdminOrStudent}}
     </section>
     {{/subject.room}}
 

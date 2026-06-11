@@ -112,6 +112,47 @@
     background-color: #223f14;
 }
 
+/* --- BOTONES DE SALA (ROOM LINKS) --- */
+.room-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.room-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background-color: #2d531a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(45, 83, 26, 0.15);
+    border: 2px solid transparent;
+}
+
+.room-button:hover {
+    background-color: #3d6b25;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(45, 83, 26, 0.25);
+}
+
+.room-button:active {
+    transform: translateY(0);
+}
+
+.room-button__icon {
+    font-size: 1.2rem;
+}
+
+.room-button__text {
+    display: inline-block;
+}
+
 /* --- CONTENIDO PRINCIPAL --- */
 .main-content {
     flex: 1;
