@@ -85,12 +85,27 @@ router.get('/', (req, res) => {
 	res.render('index', { subjects: mySubjects, userName: name, isAdmin: isAdmin });
 });
 
+// Verificar si un email ya existe
+router.get('/user/check-email/:email', (req, res) => {
+	const email = req.params.email;
+	const existingUser = VirtualClass.getUserByEmail(email);
+	res.json({ exists: !!existingUser });
+});
+
 // Crear nuevo usuario
 router.post('/user/new', (req, res) => {
+	const existingUser = VirtualClass.getUserByEmail(req.body.email);
+	if (existingUser) {
+		return res.status(400).json({ 
+			valid: false, 
+			message: 'El email ya está registrado' 
+		});
+	}
+
 	const user = new User(req.body.name, req.body.type, req.body.email, req.body.password);
 	VirtualClass.addUser(user);
 
-	res.json(user);
+	res.json({ valid: true, user });
 });
 
 // Crear nueva asignatura
@@ -200,6 +215,14 @@ router.get('/user/:id/edit', (req, res) => {
 router.post('/user/:id/edit', (req, res) => {
 	const user = VirtualClass.getUser(req.params.id);
 	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
+
+	// Validar que el nuevo email no esté en uso por otro usuario
+	if (req.body.email !== user.email) {
+		const existingUser = VirtualClass.getUserByEmail(req.body.email);
+		if (existingUser) {
+			return res.json({ valid: false, message: 'El email ya está registrado por otro usuario' });
+		}
+	}
 
 	user.name = req.body.name;
 	user.email = req.body.email;

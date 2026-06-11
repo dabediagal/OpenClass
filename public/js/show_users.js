@@ -23,6 +23,7 @@ async function editUser(userId) {
 		<p><b>Id:</b> ${user.id}</p>
 		<p><label><b>Nombre:</b> <input type="text" id="edit-name-${userId}" value="${user.name}"></label></p>
 		<p><label><b>Email:</b> <input type="email" id="edit-email-${userId}" value="${user.email}"></label></p>
+		<span id="email-message" style="font-size: 0.85rem; font-weight: 500; display: block; margin-top: 5px;"></span>
 		<p>
 			<button onclick="saveUser('${userId}')">Guardar</button>
 			<button onclick="window.location.reload()">Cancelar</button>
