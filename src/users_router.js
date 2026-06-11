@@ -1,12 +1,6 @@
 import express from 'express';
-
-import { Subject } from './models/subject.js';
 import { User } from './models/user.js';
 import { VirtualClass } from './models/virtual_class.js';
-import { Topic } from './models/topics.js';
-
-import multer from 'multer';
-import fs from 'node:fs/promises';
 
 const users_router = express.Router();
 export default users_router;
@@ -14,7 +8,7 @@ export default users_router;
 let autenticatedUser = undefined;
 
 // Formulario Iniciar Sesion
-router.post('/user/login', (req, res) => {
+users_router.post('/users/login', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.getUserByEmail(req.body.email);
 
@@ -33,22 +27,20 @@ router.post('/user/login', (req, res) => {
 	res.json(response);
 });
 
-
-
 // Verificar si un email ya existe
-router.get('/user/check-email/:email', (req, res) => {
+users_router.get('/users/check-email/:email', (req, res) => {
 	const email = req.params.email;
 	const existingUser = VirtualClass.getUserByEmail(email);
 	res.json({ exists: !!existingUser });
 });
 
 // Crear nuevo usuario
-router.post('/user/new', (req, res) => {
+users_router.post('/users/new', (req, res) => {
 	const existingUser = VirtualClass.getUserByEmail(req.body.email);
 	if (existingUser) {
-		return res.status(400).json({ 
-			valid: false, 
-			message: 'El email ya está registrado' 
+		return res.status(400).json({
+			valid: false,
+			message: 'El email ya está registrado'
 		});
 	}
 
@@ -58,16 +50,14 @@ router.post('/user/new', (req, res) => {
 	res.json({ valid: true, user });
 });
 
-
-
 // Cerrar sesión
-router.get('/logout', (req, res) => {
+users_router.get('/users/logout', (req, res) => {
 	autenticatedUser = undefined;
 	res.redirect('/login.html');
 });
 
 // Perfil del usuario autenticado
-router.get('/profile', (req, res) => {
+users_router.get('/users/profile', (req, res) => {
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	} else {
@@ -76,7 +66,7 @@ router.get('/profile', (req, res) => {
 });
 
 // Todos los usuarios
-router.get('/users', (req, res) => {
+users_router.get('/users', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
 	const name = autenticatedUser.name;
@@ -84,17 +74,15 @@ router.get('/users', (req, res) => {
 	res.render('show_users', { students: students, teachers: teachers, userName: name });
 });
 
-
-
 // Obtener usuario por id
-router.get('/user/:id/edit', (req, res) => {
+users_router.get('/users/:id/edit', (req, res) => {
 	const user = VirtualClass.getUser(req.params.id);
 	if (!user) return res.json({ valid: false });
 	res.json(user);
 });
 
 // Editar usuario
-router.post('/user/:id/edit', (req, res) => {
+users_router.post('/users/:id/edit', (req, res) => {
 	const user = VirtualClass.getUser(req.params.id);
 	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
 
@@ -102,7 +90,10 @@ router.post('/user/:id/edit', (req, res) => {
 	if (req.body.email !== user.email) {
 		const existingUser = VirtualClass.getUserByEmail(req.body.email);
 		if (existingUser) {
-			return res.json({ valid: false, message: 'El email ya está registrado por otro usuario' });
+			return res.json({
+				valid: false,
+				message: 'El email ya está registrado por otro usuario'
+			});
 		}
 	}
 
@@ -112,7 +103,7 @@ router.post('/user/:id/edit', (req, res) => {
 });
 
 // Eliminar usuario
-router.get('/user/:id/delete', (req, res) => {
+users_router.get('/users/:id/delete', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.deleteUser(req.params.id);
 
@@ -126,9 +117,7 @@ router.get('/user/:id/delete', (req, res) => {
 	res.json(response);
 });
 
-
-
-router.post('/profile/password', (req, res) => {
+users_router.post('/users/profile/password', (req, res) => {
 	if (autenticatedUser.password !== req.body.currentPassword) {
 		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
 	}
