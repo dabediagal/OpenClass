@@ -1,7 +1,7 @@
 import express from 'express';
 import { User } from '../models/user.js';
 import { VirtualClass } from '../models/virtual_class.js';
-import { getAuthenticatedUser, setAuthenticatedUser, clearAuthenticatedUser } from '../auth.js';
+import { getAuthenticatedUser, loginUser, logoutUser, requireAuth } from '../auth.js';
 
 const usersRouter = express.Router();
 export default usersRouter;
@@ -18,7 +18,7 @@ usersRouter.post('/login', (req, res) => {
 
 	if (user.password === req.body.password) {
 		response.valid = true;
-		setAuthenticatedUser(user);
+		loginUser(user, res);
 	} else {
 		response.message = 'Contraseña incorrecta.';
 	}
@@ -28,7 +28,7 @@ usersRouter.post('/login', (req, res) => {
 
 // Cerrar sesión
 usersRouter.get('/logout', (req, res) => {
-	clearAuthenticatedUser();
+	logoutUser(res);
 	res.redirect('/login.html');
 });
 
@@ -40,17 +40,17 @@ usersRouter.get('/check-email/:email', (req, res) => {
 });
 
 // Todos los usuarios
-usersRouter.get('/', (req, res) => {
+usersRouter.get('/', requireAuth, (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
-	const autenticatedUser = getAuthenticatedUser();
-	const name = autenticatedUser.name;
+	const authenticatedUser = getAuthenticatedUser(req);
+	const name = authenticatedUser.name;
 
 	res.render('show_users', { students: students, teachers: teachers, userName: name });
 });
 
 // Crear nuevo usuario
-usersRouter.post('/new', (req, res) => {
+usersRouter.post('/new', requireAuth, (req, res) => {
 	const existingUser = VirtualClass.getUserByEmail(req.body.email);
 	if (existingUser) {
 		return res.status(400).json({
@@ -66,22 +66,18 @@ usersRouter.post('/new', (req, res) => {
 });
 
 // Perfil del usuario autenticado
-usersRouter.get('/profile', (req, res) => {
-	const autenticatedUser = getAuthenticatedUser();
-	if (!autenticatedUser) {
-		return res.redirect('/login.html');
-	} else {
-		res.render('show_profile', { user: autenticatedUser });
-	}
+usersRouter.get('/profile', requireAuth, (req, res) => {
+	const authenticatedUser = getAuthenticatedUser(req);
+	res.render('show_profile', { user: authenticatedUser });
 });
 
 // Verificar contraseña
-usersRouter.post('/profile/password', (req, res) => {
-	const autenticatedUser = getAuthenticatedUser();
-	if (autenticatedUser.password !== req.body.currentPassword) {
+usersRouter.post('/profile/password', requireAuth, (req, res) => {
+	const authenticatedUser = getAuthenticatedUser(req);
+	if (authenticatedUser.password !== req.body.currentPassword) {
 		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
 	}
-	autenticatedUser.password = req.body.newPassword;
+	authenticatedUser.password = req.body.newPassword;
 	res.json({ valid: true });
 });
 
@@ -93,7 +89,7 @@ usersRouter.get('/:userId', (req, res) => {
 });
 
 // Editar usuario
-usersRouter.post('/:userId/edit', (req, res) => {
+usersRouter.post('/:userId/edit', requireAuth, (req, res) => {
 	const user = VirtualClass.getUser(req.params.userId);
 	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
 
@@ -114,7 +110,7 @@ usersRouter.post('/:userId/edit', (req, res) => {
 });
 
 // Eliminar usuario
-usersRouter.get('/:userId/delete', (req, res) => {
+usersRouter.get('/:userId/delete', requireAuth, (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.deleteUser(req.params.userId);
 

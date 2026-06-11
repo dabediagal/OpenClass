@@ -1,13 +1,17 @@
 import express from 'express';
 import mustacheExpress from 'mustache-express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import { initVirtualClass } from './init.js';
 import usersRouter from './routers/users_router.js';
 import subjectsRouter from './routers/subjects_router.js';
+import { authMiddleware } from './auth.js';
 
 const app = express();
 
 app.use(express.static('./public'));
+app.use(cookieParser());
+app.use(authMiddleware);
 
 app.use('/uploads', express.static('./uploads'));
 

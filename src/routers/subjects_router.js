@@ -5,9 +5,10 @@ import { Subject } from '../models/subject.js';
 import { User } from '../models/user.js';
 import { VirtualClass } from '../models/virtual_class.js';
 import { Topic } from '../models/topics.js';
-import { getAuthenticatedUser } from '../auth.js';
+import { getAuthenticatedUser, requireAuth } from '../auth.js';
 
 const subjectsRouter = express.Router();
+subjectsRouter.use(requireAuth);
 export default subjectsRouter;
 
 // Configurar multer con almacenamiento personalizado para PDFs
@@ -40,10 +41,7 @@ const UPLOADS_FOLDER = 'uploads/';
 
 // Página principal
 subjectsRouter.get('/', (req, res) => {
-	const authenticatedUser = getAuthenticatedUser();
-	if (!authenticatedUser) {
-		return res.redirect('/login.html');
-	}
+	const authenticatedUser = getAuthenticatedUser(req);
 
 	const allSubjects = VirtualClass.getAllSubjects();
 	let mySubjects = allSubjects;
@@ -91,20 +89,17 @@ subjectsRouter.post('/new', async (req, res) => {
 
 // Mostrar una asignatura
 subjectsRouter.get('/:subjectId', (req, res) => {
-	const autenticatedUser = getAuthenticatedUser();
-	if (!autenticatedUser) {
-		return res.redirect('/login.html');
-	}
+	const authenticatedUser = getAuthenticatedUser(req);
 
 	const subject = VirtualClass.getSubject(req.params.subjectId);
 	// los teachers y students de una asignatura en concreto
 	const teachers = subject.getTeachers();
 	const students = subject.getStudents();
 
-	const name = autenticatedUser.name;
-	const isAdmin = autenticatedUser.type === 'admin';
-	const isAdminOrTeacher = autenticatedUser.type === 'teacher' || isAdmin;
-	const isAdminOrStudent = autenticatedUser.type === 'student' || isAdmin;
+	const name = authenticatedUser.name;
+	const isAdmin = authenticatedUser.type === 'admin';
+	const isAdminOrTeacher = authenticatedUser.type === 'teacher' || isAdmin;
+	const isAdminOrStudent = authenticatedUser.type === 'student' || isAdmin;
 
 	let nonTeachers = undefined;
 	let nonStudents = undefined;
