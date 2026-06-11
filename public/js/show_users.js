@@ -15,7 +15,7 @@ async function deleteUser(userId) {
 }
 
 async function editUser(userId) {
-	const response = await fetch(`/users/${userId}/edit`);
+	const response = await fetch(`/users/${userId}`);
 	const user = await response.json();
 
 	const card = document.querySelector(`[data-id="${userId}"]`);

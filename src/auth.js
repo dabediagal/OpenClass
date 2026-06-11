@@ -1,14 +1,14 @@
 // Shared authentication state across routers
-let autenticatedUser = undefined;
+let authenticatedUser = undefined;
 
 export function getAuthenticatedUser() {
-	return autenticatedUser;
+	return authenticatedUser;
 }
 
 export function setAuthenticatedUser(user) {
-	autenticatedUser = user;
+	authenticatedUser = user;
 }
 
 export function clearAuthenticatedUser() {
-	autenticatedUser = undefined;
+	authenticatedUser = undefined;
 }

@@ -2,8 +2,8 @@ import express from 'express';
 import mustacheExpress from 'mustache-express';
 import bodyParser from 'body-parser';
 import { initVirtualClass } from './init.js';
-import users_router from './users_router.js';
-import subjects_router from './subjects_router.js';
+import usersRouter from './routers/users_router.js';
+import subjectsRouter from './routers/subjects_router.js';
 
 const app = express();
 
@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
 	res.redirect('/subjects');
 });
 
-app.use('/users', users_router);
-app.use('/subjects', subjects_router);
+app.use('/users', usersRouter);
+app.use('/subjects', subjectsRouter);
 
 (async () => {
 	try {

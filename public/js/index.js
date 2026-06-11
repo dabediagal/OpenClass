@@ -3,7 +3,7 @@ async function deleteSubject(subjectId) {
 	if (!accept) {
 		return;
 	}
-	const response = await fetch(`/subjects/subject/${subjectId}/delete`);
+	const response = await fetch(`/subjects/${subjectId}/delete`);
 	const result = await response.json();
 
 	if (result.valid) {

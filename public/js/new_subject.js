@@ -2,7 +2,7 @@ async function newSubject(event){
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const response = await fetch(`/subjects/subject/new`, {
+    const response = await fetch(`/subjects/new`, {
 		method: 'POST',
 		body: new URLSearchParams(formData),
 	});

@@ -1,13 +1,13 @@
 import express from 'express';
-import { User } from './models/user.js';
-import { VirtualClass } from './models/virtual_class.js';
-import { getAuthenticatedUser, setAuthenticatedUser, clearAuthenticatedUser } from './auth.js';
+import { User } from '../models/user.js';
+import { VirtualClass } from '../models/virtual_class.js';
+import { getAuthenticatedUser, setAuthenticatedUser, clearAuthenticatedUser } from '../auth.js';
 
-const users_router = express.Router();
-export default users_router;
+const usersRouter = express.Router();
+export default usersRouter;
 
 // Formulario Iniciar Sesion
-users_router.post('/login', (req, res) => {
+usersRouter.post('/login', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.getUserByEmail(req.body.email);
 
@@ -26,15 +26,31 @@ users_router.post('/login', (req, res) => {
 	res.json(response);
 });
 
+// Cerrar sesión
+usersRouter.get('/logout', (req, res) => {
+	clearAuthenticatedUser();
+	res.redirect('/login.html');
+});
+
 // Verificar si un email ya existe
-users_router.get('/check-email/:email', (req, res) => {
+usersRouter.get('/check-email/:email', (req, res) => {
 	const email = req.params.email;
 	const existingUser = VirtualClass.getUserByEmail(email);
 	res.json({ exists: !!existingUser });
 });
 
+// Todos los usuarios
+usersRouter.get('/', (req, res) => {
+	const students = VirtualClass.getAllStudents();
+	const teachers = VirtualClass.getAllTeachers();
+	const autenticatedUser = getAuthenticatedUser();
+	const name = autenticatedUser.name;
+
+	res.render('show_users', { students: students, teachers: teachers, userName: name });
+});
+
 // Crear nuevo usuario
-users_router.post('/new', (req, res) => {
+usersRouter.post('/new', (req, res) => {
 	const existingUser = VirtualClass.getUserByEmail(req.body.email);
 	if (existingUser) {
 		return res.status(400).json({
@@ -49,14 +65,8 @@ users_router.post('/new', (req, res) => {
 	res.json({ valid: true, user });
 });
 
-// Cerrar sesión
-users_router.get('/logout', (req, res) => {
-	clearAuthenticatedUser();
-	res.redirect('/login.html');
-});
-
 // Perfil del usuario autenticado
-users_router.get('/profile', (req, res) => {
+usersRouter.get('/profile', (req, res) => {
 	const autenticatedUser = getAuthenticatedUser();
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
@@ -65,26 +75,26 @@ users_router.get('/profile', (req, res) => {
 	}
 });
 
-// Todos los usuarios
-users_router.get('/', (req, res) => {
-	const students = VirtualClass.getAllStudents();
-	const teachers = VirtualClass.getAllTeachers();
+// Verificar contraseña
+usersRouter.post('/profile/password', (req, res) => {
 	const autenticatedUser = getAuthenticatedUser();
-	const name = autenticatedUser.name;
-
-	res.render('show_users', { students: students, teachers: teachers, userName: name });
+	if (autenticatedUser.password !== req.body.currentPassword) {
+		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
+	}
+	autenticatedUser.password = req.body.newPassword;
+	res.json({ valid: true });
 });
 
 // Obtener usuario por id
-users_router.get('/:id/edit', (req, res) => {
-	const user = VirtualClass.getUser(req.params.id);
+usersRouter.get('/:userId', (req, res) => {
+	const user = VirtualClass.getUser(req.params.userId);
 	if (!user) return res.json({ valid: false });
 	res.json(user);
 });
 
 // Editar usuario
-users_router.post('/:id/edit', (req, res) => {
-	const user = VirtualClass.getUser(req.params.id);
+usersRouter.post('/:userId/edit', (req, res) => {
+	const user = VirtualClass.getUser(req.params.userId);
 	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
 
 	// Validar que el nuevo email no esté en uso por otro usuario
@@ -104,9 +114,9 @@ users_router.post('/:id/edit', (req, res) => {
 });
 
 // Eliminar usuario
-users_router.get('/:id/delete', (req, res) => {
+usersRouter.get('/:userId/delete', (req, res) => {
 	let response = { valid: false, message: '' };
-	const user = VirtualClass.deleteUser(req.params.id);
+	const user = VirtualClass.deleteUser(req.params.userId);
 
 	if (user) {
 		response.valid = true;
@@ -116,14 +126,4 @@ users_router.get('/:id/delete', (req, res) => {
 	}
 
 	res.json(response);
-});
-
-// Verificar contraseña
-users_router.post('/profile/password', (req, res) => {
-	const autenticatedUser = getAuthenticatedUser();
-	if (autenticatedUser.password !== req.body.currentPassword) {
-		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
-	}
-	autenticatedUser.password = req.body.newPassword;
-	res.json({ valid: true });
 });
