@@ -2,7 +2,8 @@ import express from 'express';
 import mustacheExpress from 'mustache-express';
 import bodyParser from 'body-parser';
 import { initVirtualClass } from './init.js';
-import router from './router.js';
+import users_router from './users_router.js';
+import subjects_router from './subjects_router.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ try {
 	console.error('Error initializing virtual class:', error);
 }
 
-app.use('/', router);
+app.use('/users', users_router);
+app.use('/subjects', subjects_router);
 
 app.listen(3000, () => console.log('Web ready in http://localhost:3000/'));
