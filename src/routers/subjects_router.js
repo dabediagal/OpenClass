@@ -205,6 +205,41 @@ subjectsRouter.post('/:subjectId/topic/new', upload.single('pdf'), (req, res) =>
 	}
 });
 
+// Obtener topic por id
+subjectsRouter.get('/:subjectId/topic/:topicId', (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.subjectId);
+	const topic = subject.getTopic(req.params.topicId);
+	if (!topic) return res.json({ valid: false, message: 'Tema no encontrado' });
+	res.json(topic);
+});
+
+// Editar topic de una asignatura CON AJAX
+subjectsRouter.post('/:subjectId/topic/:topicId/edit', upload.single('pdf'), async (req, res) => {
+	const subject = VirtualClass.getSubject(req.params.subjectId);
+	const topic = subject.getTopic(req.params.topicId);
+	if (!topic) return res.json({ valid: false, message: 'Tema no encontrado' });
+
+	const newOrder = req.body.order;
+	for (const t of subject.topics.values()) {
+		if (t.id !== req.params.topicId && t.order === newOrder) {
+			return res.json({ valid: false, message: `Ya existe un tema en la posición ${newOrder}` });
+		}
+	}
+
+	if (req.file) {
+		if (topic.attachment) {
+			await fs.rm(UPLOADS_FOLDER + topic.attachment).catch(() => {});
+		}
+		topic.attachment = req.file.filename;
+	}
+
+	topic.title = req.body.title;
+	topic.descripcion = req.body.descripcion;
+	topic.order = newOrder;
+
+	res.json({ valid: true, message: 'Tema actualizado correctamente' });
+});
+
 // Eliminar topic de una asignatura CON AJAX
 subjectsRouter.get('/:subjectId/topic/:topicId/delete', async (req, res) => {
 	let response = { valid: false, message: '' };

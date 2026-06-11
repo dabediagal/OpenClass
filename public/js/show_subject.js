@@ -75,6 +75,51 @@ async function editSubject(event) {
 	}
 }
 
+async function editTopic(topicId) {
+	const response = await fetch(`/subjects/${SUBJECT_ID}/topic/${topicId}`);
+	const topic = await response.json();
+
+	const li = document.querySelector(`[data-topic-id="${topicId}"]`);
+	li.innerHTML = `
+		<p><label><b>Título:</b> <input type="text" id="edit-title-${topicId}" value="${topic.title}" required></label></p>
+		<p><label><b>Descripción:</b> <input type="text" id="edit-desc-${topicId}" value="${topic.descripcion || ''}"></label></p>
+		<p><label><b>Orden:</b> <input type="number" id="edit-order-${topicId}" value="${topic.order}" min="1"></label></p>
+		<p><label><b>PDF:</b> <input type="file" id="edit-pdf-${topicId}" accept="application/pdf"></label>
+		${topic.attachment ? `<small>PDF actual: <a href="/uploads/${topic.attachment}" target="_blank">${topic.attachment}</a></small>` : ''}</p>
+		<p>
+			<button onclick="saveTopic('${topicId}')">Guardar</button>
+			<button onclick="window.location.reload()">Cancelar</button>
+		</p>
+	`;
+}
+
+async function saveTopic(topicId) {
+	const title = document.getElementById(`edit-title-${topicId}`).value;
+	const descripcion = document.getElementById(`edit-desc-${topicId}`).value;
+	const order = document.getElementById(`edit-order-${topicId}`).value;
+	const pdfInput = document.getElementById(`edit-pdf-${topicId}`);
+
+	const formData = new FormData();
+	formData.append('title', title);
+	formData.append('descripcion', descripcion);
+	formData.append('order', order);
+	if (pdfInput.files[0]) {
+		formData.append('pdf', pdfInput.files[0]);
+	}
+
+	const response = await fetch(`/subjects/${SUBJECT_ID}/topic/${topicId}/edit`, {
+		method: 'POST',
+		body: formData,
+	});
+	const result = await response.json();
+
+	if (result.valid) {
+		window.location.reload();
+	} else {
+		alert(`Error: ${result.message}`);
+	}
+}
+
 async function linkUser(event) {
 	event.preventDefault();
 

@@ -84,6 +84,10 @@ export class Subject {
 		return topic;
 	}
 
+	getTopic(id) {
+		return this.topics.get(id) || null;
+	}
+
 	deleteTopic(id) {
 		const topic = this.topics.get(id);
 		if (!topic) return null;
