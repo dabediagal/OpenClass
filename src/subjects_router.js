@@ -66,7 +66,7 @@ subjects_router.get('/', (req, res) => {
 });
 
 // Crear nueva asignatura
-subjects_router.post('/subjects/subject/new', async (req, res) => {
+subjects_router.post('/subject/new', async (req, res) => {
     const subjectName = req.body.name?.trim();
     const subjectDescription = req.body.description?.trim();
 
@@ -92,7 +92,7 @@ subjects_router.post('/subjects/subject/new', async (req, res) => {
 });
 
 // Mostrar una asignatura
-subjects_router.get('/subjects/subject/:id', (req, res) => {
+subjects_router.get('/subject/:id', (req, res) => {
     if (!autenticatedUser) {
         return res.redirect('/login.html');
     }
@@ -130,7 +130,7 @@ subjects_router.get('/subjects/subject/:id', (req, res) => {
 });
 
 // Asociar usuario a una asignatura
-subjects_router.post('/subjects/subject/:id/linkUser', (req, res) => {
+subjects_router.post('/subject/:id/linkUser', (req, res) => {
     const subject = VirtualClass.getSubject(req.params.id);
     subject.addUser(req.body.user);
 
@@ -138,7 +138,7 @@ subjects_router.post('/subjects/subject/:id/linkUser', (req, res) => {
 });
 
 // Eliminar asignatura
-subjects_router.get('/subjects/subject/:id/delete', async (req, res) => {
+subjects_router.get('/subject/:id/delete', async (req, res) => {
 	let response = { valid: false, message: '' };
 	const subject = await VirtualClass.deleteSubject(req.params.id);
 
@@ -153,15 +153,15 @@ subjects_router.get('/subjects/subject/:id/delete', async (req, res) => {
 });
 
 //Eliminar usuario de una asignatura
-subjects_router.get('/subjects/subject/:subjectId/user/:userId/delete', (req, res) => {
+subjects_router.get('/subject/:subjectId/user/:userId/delete', (req, res) => {
 	const subject = VirtualClass.getSubject(req.params.subjectId);
 	subject.deleteUser(req.params.userId);
 
-	res.redirect(`/subject/${req.params.subjectId}`);
+	res.redirect(`/subjects/subject/${req.params.subjectId}`);
 });
 
 // Añadir topic a una asignatura con AJAX
-subjects_router.post('/subjects/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
+subjects_router.post('/subject/:id/topic/new', upload.single('pdf'), (req, res) => {
 	// Validar que si hay archivo, sea PDF
 	if (req.file && req.file.mimetype !== 'application/pdf') {
 		return res.json({ valid: false, message: 'Solo se permiten archivos PDF' });
@@ -178,7 +178,7 @@ subjects_router.post('/subjects/subject/:id/topic/new', upload.single('pdf'), (r
 });
 
 // Eliminar topic de una asignatura CON AJAX
-subjects_router.get('/subjects/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
+subjects_router.get('/subject/:subjectId/topic/:topicId/delete', async (req, res) => {
 	let response = { valid: false, message: '' };
 	const subject = VirtualClass.getSubject(req.params.subjectId);
 	const topic = subject.deleteTopic(req.params.topicId);
