@@ -117,6 +117,7 @@ users_router.get('/users/:id/delete', (req, res) => {
 	res.json(response);
 });
 
+// Verificar contraseña
 users_router.post('/users/profile/password', (req, res) => {
 	if (autenticatedUser.password !== req.body.currentPassword) {
 		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });

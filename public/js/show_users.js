@@ -3,7 +3,7 @@ async function deleteUser(userId) {
 	if (!accept) {
 		return;
 	}
-	const response = await fetch(`/user/${userId}/delete`);
+	const response = await fetch(`/users/${userId}/delete`);
 	const result = await response.json();
 
 	if (result.valid) {
@@ -15,7 +15,7 @@ async function deleteUser(userId) {
 }
 
 async function editUser(userId) {
-	const response = await fetch(`/user/${userId}/edit`);
+	const response = await fetch(`/users/${userId}/edit`);
 	const user = await response.json();
 
 	const card = document.querySelector(`[data-id="${userId}"]`);
@@ -38,7 +38,7 @@ async function saveUser(userId) {
 	const name = document.getElementById(`edit-name-${userId}`).value;
 	const email = document.getElementById(`edit-email-${userId}`).value;
 
-	const response = await fetch(`/user/${userId}/edit`, {
+	const response = await fetch(`/users/${userId}/edit`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ name, email })

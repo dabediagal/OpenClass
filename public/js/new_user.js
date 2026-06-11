@@ -24,7 +24,7 @@ async function newUser(event) {
 
 	// Verificar si el email ya existe
 	try {
-		const response = await fetch(`/user/check-email/${encodeURIComponent(email)}`);
+		const response = await fetch(`/users/check-email/${encodeURIComponent(email)}`);
 		const data = await response.json();
 
 		if (data.exists) {
@@ -39,7 +39,7 @@ async function newUser(event) {
 
 	//seguimos
 	const formData = new FormData(event.target);
-	const createResponse = await fetch(`/user/new`, {
+	const createResponse = await fetch(`/users/new`, {
 		method: 'POST',
 		body: new URLSearchParams(formData)
 	});

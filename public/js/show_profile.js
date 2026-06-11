@@ -5,7 +5,7 @@ async function changePassword(event) {
 
 	const formData = new FormData(event.target);
 	if (formData.get('newPassword') !== formData.get('confirm_password')) return;
-	const response = await fetch(`/profile/password`, {
+	const response = await fetch(`/users/profile/password`, {
 		method: 'POST',
 		body: new URLSearchParams(formData)
 	});
