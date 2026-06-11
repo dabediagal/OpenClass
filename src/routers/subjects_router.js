@@ -123,6 +123,40 @@ subjectsRouter.get('/:subjectId', (req, res) => {
 	});
 });
 
+subjectsRouter.post('/:subjectId/edit', (req, res) => {
+	const authenticatedUser = req.authenticatedUser;
+	if (!authenticatedUser || authenticatedUser.type !== 'admin') {
+		return res.status(403).json({ valid: false, message: 'Acceso denegado' });
+	}
+
+	const subject = VirtualClass.getSubject(req.params.subjectId);
+	if (!subject) {
+		return res.status(404).json({ valid: false, message: 'Asignatura no encontrada' });
+	}
+
+	const name = req.body.name?.trim();
+	const description = req.body.description?.trim();
+	if (!name) {
+		return res.status(400).json({ valid: false, message: 'El nombre es obligatorio' });
+	}
+
+	if (name !== subject.name) {
+		const existingSubject = VirtualClass.getAllSubjects().find(
+			(s) => s.name.toLowerCase() === name.toLowerCase() && s.id !== subject.id
+		);
+		if (existingSubject) {
+			return res.status(400).json({
+				valid: false,
+				message: 'Ya existe otra asignatura con este nombre'
+			});
+		}
+	}
+
+	subject.name = name;
+	subject.description = description;
+	res.json({ valid: true });
+});
+
 // Eliminar asignatura
 subjectsRouter.get('/:subjectId/delete', async (req, res) => {
 	let response = { valid: false, message: '' };

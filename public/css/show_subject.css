@@ -168,6 +168,111 @@
     font-weight: 600;
 }
 
+#subjectHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.subject-description {
+    color: #475569;
+    line-height: 1.6;
+    max-width: 720px;
+}
+
+#editSubjectButton {
+    align-self: flex-start;
+    padding: 10px 18px;
+    border: 1px solid #334155;
+    background-color: #ffffff;
+    color: #334155;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-weight: 600;
+}
+
+#editSubjectButton:hover {
+    background-color: #f1f5f9;
+    transform: translateY(-1px);
+}
+
+.subject-edit-form {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+    max-width: 720px;
+}
+
+.subject-edit-form fieldset {
+    border: none;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+}
+
+.subject-edit-form legend {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.subject-edit-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.subject-edit-form input[type="text"],
+.subject-edit-form textarea {
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-size: 0.95rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subject-edit-form textarea {
+    resize: vertical;
+}
+
+.subject-edit-form .form-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.subject-edit-form button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.subject-edit-form button[type="submit"] {
+    background-color: #2d531a;
+    color: #ffffff;
+}
+
+.subject-edit-form button[type="button"] {
+    background-color: #f8fafc;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
+.subject-edit-form button[type="button"]:hover,
+.subject-edit-form button[type="submit"]:hover {
+    opacity: 0.95;
+}
+
 /* --- GRID DE DOS COLUMNAS --- */
 .sections-grid {
     display: grid;

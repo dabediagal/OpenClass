@@ -25,8 +25,31 @@
     </aside>
 
     <main class="main-content">
-    <h1>{{subject.name}}</h1>
-    {{#subject.description}}<p class="subject-description">{{subject.description}}</p>{{/subject.description}}
+    <div id="subjectHeader">
+        <h1>{{subject.name}}</h1>
+        {{#subject.description}}<p class="subject-description">{{subject.description}}</p>{{/subject.description}}
+    </div>
+
+    {{#isAdmin}}
+    <button id="editSubjectButton" onclick="toggleEditSubjectForm()">Editar asignatura</button>
+    <form id="editSubjectForm" class="subject-edit-form" style="display:none; margin: 1rem 0;" onsubmit="editSubject(event)">
+        <fieldset>
+            <legend>Editar asignatura</legend>
+            <label>
+                Nombre:
+                <input type="text" name="name" required value="{{subject.name}}">
+            </label>
+            <label>
+                Descripción:
+                <textarea name="description" rows="3">{{subject.description}}</textarea>
+            </label>
+            <div class="form-actions">
+                <button type="submit">Guardar</button>
+                <button type="button" onclick="toggleEditSubjectForm(true)">Cancelar</button>
+            </div>
+        </fieldset>
+    </form>
+    {{/isAdmin}}
 
     {{#subject.room}}
     <section class="room-links">
