@@ -74,11 +74,11 @@
     <ul>
         {{#teachers}}
             <li>
-                {{name}} 
+                {{name}}
                 {{#isAdmin}}
-                <button onclick="deleteUser({{subject.id}}, {{id}})">Eliminar</button> 
+                <button onclick="deleteUser(SUBJECT_ID, {{id}})">Eliminar</button>
                 {{/isAdmin}}
-            </li> 
+            </li>
         {{/teachers}}
     </ul>
     
@@ -116,9 +116,9 @@
     <ul>
         {{#students}}
             <li>
-                {{name}} 
+                {{name}}
                 {{#isAdmin}}
-                <button onclick="deleteUser({{subject.id}}, {{id}})">Eliminar</button> 
+                <button onclick="deleteUser(SUBJECT_ID, {{id}})">Eliminar</button>
                 {{/isAdmin}}
             </li>
         {{/students}}
