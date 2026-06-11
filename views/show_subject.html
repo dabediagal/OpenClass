@@ -139,11 +139,12 @@
         {{#topics.length}}
         <ul>
             {{#topics}}
-                <li>
+                <li data-topic-id="{{id}}">
                     <strong>{{order}}. {{title}}</strong> — {{descripcion}}
                     {{#attachment}}<a href="/uploads/{{attachment}}" target="_blank">Ver PDF</a>{{/attachment}}
                     {{#isAdminOrTeacher}}
                     <button onclick="deleteTopic('{{id}}')">Eliminar</button>
+                    <button onclick="editTopic('{{id}}')">Editar</button>
                     {{/isAdminOrTeacher}}
                 </li>
             {{/topics}}
