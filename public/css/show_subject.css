@@ -112,6 +112,29 @@
     background-color: #223f14;
 }
 
+.topics input[type="file"] {
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.topics input[type="file"]::file-selector-button {
+    padding: 6px 14px;
+    background-color: #2d531a;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    margin-right: 10px;
+    transition: background-color 0.2s;
+}
+
+.topics input[type="file"]::file-selector-button:hover {
+    background-color: #3d6b25;
+}
+
 /* --- BOTONES DE SALA (ROOM LINKS) --- */
 .room-links {
     display: flex;
