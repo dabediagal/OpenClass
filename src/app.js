@@ -24,6 +24,11 @@ try {
 	console.error('Error initializing virtual class:', error);
 }
 
+// Root: redirect to subjects router (mounted at /subjects)
+app.get('/', (req, res) => {
+	res.redirect('/subjects');
+});
+
 app.use('/users', users_router);
 app.use('/subjects', subjects_router);
 
