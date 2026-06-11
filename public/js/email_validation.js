@@ -1,20 +1,27 @@
-function setupEmailValidation(email, messageId) {
-    const emailInput = document.getElementById(email);
-    const messageSpan = document.getElementById(messageId);
+function setupEmailValidation(email, messageId, originalEmail) {
+	const emailInput = document.getElementById(email);
+	const messageSpan = document.getElementById(messageId);
 
 	if (!emailInput || !messageSpan) return null;
 
 	async function updateMessage() {
-		const email = emailInput.value;
+		const newEmail = emailInput.value;
 
-		if (email === '') {
+		if (newEmail === '') {
+			messageSpan.textContent = '';
+			messageSpan.style.color = '';
+			return;
+		}
+
+		// Si el email nuevo es igual al original, no mostrar error
+		if (originalEmail && newEmail.toLowerCase() === originalEmail.toLowerCase()) {
 			messageSpan.textContent = '';
 			messageSpan.style.color = '';
 			return;
 		}
 
 		try {
-			const response = await fetch(`/user/check-email/${encodeURIComponent(email)}`);
+			const response = await fetch(`/user/check-email/${encodeURIComponent(newEmail)}`);
 			const data = await response.json();
 
 			if (!data.exists) {

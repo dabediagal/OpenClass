@@ -23,12 +23,15 @@ async function editUser(userId) {
 		<p><b>Id:</b> ${user.id}</p>
 		<p><label><b>Nombre:</b> <input type="text" id="edit-name-${userId}" value="${user.name}"></label></p>
 		<p><label><b>Email:</b> <input type="email" id="edit-email-${userId}" value="${user.email}"></label></p>
-		<span id="email-message" style="font-size: 0.85rem; font-weight: 500; display: block; margin-top: 5px;"></span>
+		<span id="email-message-${userId}" style="font-size: 0.85rem; font-weight: 500; display: block; margin-top: 5px;"></span>
 		<p>
 			<button onclick="saveUser('${userId}')">Guardar</button>
 			<button onclick="window.location.reload()">Cancelar</button>
 		</p>
 	`;
+
+	// Inicializar validación de email en vivo (pasar el email original)
+	setupEmailValidation(`edit-email-${userId}`, `email-message-${userId}`, user.email);
 }
 
 async function saveUser(userId) {
@@ -38,7 +41,7 @@ async function saveUser(userId) {
 	const response = await fetch(`/user/${userId}/edit`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ name, email }),
+		body: JSON.stringify({ name, email })
 	});
 	const result = await response.json();
 
