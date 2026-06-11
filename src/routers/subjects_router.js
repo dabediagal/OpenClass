@@ -182,10 +182,18 @@ subjectsRouter.post('/:subjectId/linkUser', (req, res) => {
 
 //Eliminar usuario de una asignatura
 subjectsRouter.get('/:subjectId/user/:userId/delete', (req, res) => {
+	let response = {valid: false, message: '' };
 	const subject = VirtualClass.getSubject(req.params.subjectId);
-	subject.deleteUser(req.params.userId);
+	const user = subject.deleteUser(req.params.userId);
 
-	res.redirect(`/subjects/${req.params.subjectId}`);
+	if (user){
+		response.valid = true;
+		response.message = 'Usuario eliminado de la asignatura correctamente'
+	} else {
+		response.message = 'Usuario no encontrado';
+	}
+
+	res.json(response);
 });
 
 // Añadir topic a una asignatura con AJAX

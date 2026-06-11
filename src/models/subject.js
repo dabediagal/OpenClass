@@ -70,6 +70,7 @@ export class Subject {
 		} else {
 			this.students = this.students.filter((studentId) => studentId !== id);
 		}
+		return user;
 	}
 
 	addTopic(title, descripcion, order, attachment) {

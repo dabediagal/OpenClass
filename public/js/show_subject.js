@@ -137,3 +137,15 @@ async function linkUser(event) {
 		alert(`Error: ${result.message}`);
 	}
 }
+
+async function deleteUser(subjectId, userId) {
+	const response = await fetch(`/${subjectId}/user/${userId}/delete`);
+	const result = await response.json();
+
+	if (result.valid) {
+		alert(result.message);
+		window.location = '/users';
+	} else {
+		alert(`Error: ${result.message}`);
+	}
+}

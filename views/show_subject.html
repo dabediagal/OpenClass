@@ -76,7 +76,7 @@
             <li>
                 {{name}} 
                 {{#isAdmin}}
-                <a href="/subjects/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                <button onclick="deleteUser({{subject.id}}, {{id}})">Eliminar</button> 
                 {{/isAdmin}}
             </li> 
         {{/teachers}}
@@ -118,7 +118,7 @@
             <li>
                 {{name}} 
                 {{#isAdmin}}
-                <a href="/subjects/{{subject.id}}/user/{{id}}/delete">Eliminar</a> 
+                <button onclick="deleteUser({{subject.id}}, {{id}})">Eliminar</button> 
                 {{/isAdmin}}
             </li>
         {{/students}}
