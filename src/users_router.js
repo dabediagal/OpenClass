@@ -8,7 +8,7 @@ export default users_router;
 let autenticatedUser = undefined;
 
 // Formulario Iniciar Sesion
-users_router.post('/users/login', (req, res) => {
+users_router.post('/login', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.getUserByEmail(req.body.email);
 
@@ -28,14 +28,14 @@ users_router.post('/users/login', (req, res) => {
 });
 
 // Verificar si un email ya existe
-users_router.get('/users/check-email/:email', (req, res) => {
+users_router.get('/check-email/:email', (req, res) => {
 	const email = req.params.email;
 	const existingUser = VirtualClass.getUserByEmail(email);
 	res.json({ exists: !!existingUser });
 });
 
 // Crear nuevo usuario
-users_router.post('/users/new', (req, res) => {
+users_router.post('/new', (req, res) => {
 	const existingUser = VirtualClass.getUserByEmail(req.body.email);
 	if (existingUser) {
 		return res.status(400).json({
@@ -51,13 +51,13 @@ users_router.post('/users/new', (req, res) => {
 });
 
 // Cerrar sesión
-users_router.get('/users/logout', (req, res) => {
+users_router.get('/logout', (req, res) => {
 	autenticatedUser = undefined;
 	res.redirect('/login.html');
 });
 
 // Perfil del usuario autenticado
-users_router.get('/users/profile', (req, res) => {
+users_router.get('/profile', (req, res) => {
 	if (!autenticatedUser) {
 		return res.redirect('/login.html');
 	} else {
@@ -66,7 +66,7 @@ users_router.get('/users/profile', (req, res) => {
 });
 
 // Todos los usuarios
-users_router.get('/users', (req, res) => {
+users_router.get('/', (req, res) => {
 	const students = VirtualClass.getAllStudents();
 	const teachers = VirtualClass.getAllTeachers();
 	const name = autenticatedUser.name;
@@ -75,14 +75,14 @@ users_router.get('/users', (req, res) => {
 });
 
 // Obtener usuario por id
-users_router.get('/users/:id/edit', (req, res) => {
+users_router.get('/:id/edit', (req, res) => {
 	const user = VirtualClass.getUser(req.params.id);
 	if (!user) return res.json({ valid: false });
 	res.json(user);
 });
 
 // Editar usuario
-users_router.post('/users/:id/edit', (req, res) => {
+users_router.post('/:id/edit', (req, res) => {
 	const user = VirtualClass.getUser(req.params.id);
 	if (!user) return res.json({ valid: false, message: 'Usuario no encontrado' });
 
@@ -103,7 +103,7 @@ users_router.post('/users/:id/edit', (req, res) => {
 });
 
 // Eliminar usuario
-users_router.get('/users/:id/delete', (req, res) => {
+users_router.get('/:id/delete', (req, res) => {
 	let response = { valid: false, message: '' };
 	const user = VirtualClass.deleteUser(req.params.id);
 
@@ -118,7 +118,7 @@ users_router.get('/users/:id/delete', (req, res) => {
 });
 
 // Verificar contraseña
-users_router.post('/users/profile/password', (req, res) => {
+users_router.post('/profile/password', (req, res) => {
 	if (autenticatedUser.password !== req.body.currentPassword) {
 		return res.json({ valid: false, message: 'Contraseña actual incorrecta' });
 	}

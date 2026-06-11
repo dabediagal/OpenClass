@@ -21,7 +21,7 @@ function setupEmailValidation(email, messageId, originalEmail) {
 		}
 
 		try {
-			const response = await fetch(`/user/check-email/${encodeURIComponent(newEmail)}`);
+			const response = await fetch(`/users/check-email/${encodeURIComponent(newEmail)}`);
 			const data = await response.json();
 
 			if (!data.exists) {
