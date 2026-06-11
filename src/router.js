@@ -121,6 +121,10 @@ router.post('/subject/new', async (req, res) => {
 
 // Mostrar una asignatura
 router.get('/subject/:id', (req, res) => {
+	if (!autenticatedUser) {
+		return res.redirect('/login.html');
+	}
+
 	const subject = VirtualClass.getSubject(req.params.id);
 	// los teachers y students de una asignatura en concreto
 	const teachers = subject.getTeachers();
