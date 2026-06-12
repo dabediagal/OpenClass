@@ -48,7 +48,7 @@ export async function initVirtualClass() {
 	// También creamos un par de asignaturas de prueba
 	const mates = await Subject.create(
 		'Matemáticas Avanzadas',
-		'Son mates avanzadas como bien pone ahí'
+		'Explora el cálculo multivariable, el álgebra lineal y las ecuaciones diferenciales. Aprende a dominar el lenguaje abstracto que impulsa la ciencia de datos, la física moderna y la inteligencia artificial.'
 	);
 	const prog = await Subject.create('Programación en JavaScript', 'No lo hagáis nunca');
 	const entornos = await Subject.create(
