@@ -6,6 +6,8 @@ import { getAuthenticatedUser, loginUser, logoutUser, requireAuth } from '../aut
 const usersRouter = express.Router();
 export default usersRouter;
 
+const PAGE_SIZE = 3; // Número de usuarios que se muestran por "página" (cambiar aquí para ajustarlo)
+
 // Formulario Iniciar Sesion
 usersRouter.post('/login', (req, res) => {
 	let response = { valid: false, message: '' };
@@ -46,7 +48,30 @@ usersRouter.get('/', requireAuth, (req, res) => {
 	const authenticatedUser = getAuthenticatedUser(req);
 	const name = authenticatedUser.name;
 
-	res.render('show_users', { students: students, teachers: teachers, userName: name });
+	res.render('show_users', {
+		students: students.slice(0, PAGE_SIZE),
+		teachers: teachers.slice(0, PAGE_SIZE),
+		moreStudents: students.length > PAGE_SIZE,
+		moreTeachers: teachers.length > PAGE_SIZE,
+		userName: name
+	});
+});
+
+// Listado paginado para AJAX (botón "Ver más")
+usersRouter.get('/list/:type', requireAuth, (req, res) => {
+	const offset = parseInt(req.query.offset) || 0;
+	const limit = parseInt(req.query.limit) || PAGE_SIZE;
+
+	const all =
+		req.params.type === 'teacher'
+			? VirtualClass.getAllTeachers()
+			: VirtualClass.getAllStudents();
+
+	const slice = all.slice(offset, offset + limit);
+	res.json({
+		users: slice,
+		hasMore: offset + limit < all.length
+	});
 });
 
 // Crear nuevo usuario

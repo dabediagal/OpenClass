@@ -47,6 +47,9 @@
                 {{^teachers}}
                     <p>Aún no hay profes</p>
                 {{/teachers}}
+                {{#moreTeachers}}
+                    <button id="more-teachers" class="btn-more" onclick="loadMore('teacher')">Ver más</button>
+                {{/moreTeachers}}
             </section>
 
             <section class="students">
@@ -63,6 +66,9 @@
                 {{^students}}
                     <p>Aún no hay alumnos</p>
                 {{/students}}
+                {{#moreStudents}}
+                    <button id="more-students" class="btn-more" onclick="loadMore('student')">Ver más</button>
+                {{/moreStudents}}
             </section>
             </div>
         </main>
