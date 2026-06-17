@@ -23,6 +23,10 @@ export class Subject {
 		return subject;
 	}
 
+	getTopics() {
+		return [...this.topics.values()].sort((a, b) => a.order - b.order);
+	}
+
 	getTeachers() {
 		let teachersFullInfo = []; //AQUI GUARDARE LOS TEACHERS COMPLETOS, NOT ONLY IDS
 		for (let teacher of this.teachers) {

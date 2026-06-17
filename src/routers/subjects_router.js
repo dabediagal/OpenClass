@@ -115,7 +115,7 @@ subjectsRouter.get('/:subjectId', (req, res) => {
 		students,
 		nonTeachers,
 		nonStudents,
-		topics: Array.from(subject.topics.values()),
+		topics: subject.getTopics(),
 		userName: name,
 		isAdmin,
 		isAdminOrTeacher,
