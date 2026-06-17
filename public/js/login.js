@@ -4,7 +4,7 @@ async function login(event) {
 	const formData = new FormData(event.target);
 	const response = await fetch(`/users/login`, {
 		method: 'POST',
-		body: new URLSearchParams(formData),
+		body: new URLSearchParams(formData)
 	});
 	const result = await response.json();
 

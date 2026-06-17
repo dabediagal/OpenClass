@@ -109,7 +109,7 @@ async function saveTopic(topicId) {
 
 	const response = await fetch(`/subjects/${SUBJECT_ID}/topic/${topicId}/edit`, {
 		method: 'POST',
-		body: formData,
+		body: formData
 	});
 	const result = await response.json();
 

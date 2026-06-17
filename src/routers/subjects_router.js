@@ -182,13 +182,13 @@ subjectsRouter.post('/:subjectId/linkUser', (req, res) => {
 
 //Eliminar usuario de una asignatura
 subjectsRouter.get('/:subjectId/user/:userId/delete', (req, res) => {
-	let response = {valid: false, message: '' };
+	let response = { valid: false, message: '' };
 	const subject = VirtualClass.getSubject(req.params.subjectId);
 	const user = subject.deleteUser(req.params.userId);
 
-	if (user){
+	if (user) {
 		response.valid = true;
-		response.message = 'Usuario eliminado de la asignatura correctamente'
+		response.message = 'Usuario eliminado de la asignatura correctamente';
 	} else {
 		response.message = 'Usuario no encontrado';
 	}
@@ -230,7 +230,10 @@ subjectsRouter.post('/:subjectId/topic/:topicId/edit', upload.single('pdf'), asy
 	const newOrder = req.body.order;
 	for (const t of subject.topics.values()) {
 		if (t.id !== req.params.topicId && t.order === newOrder) {
-			return res.json({ valid: false, message: `Ya existe un tema en la posición ${newOrder}` });
+			return res.json({
+				valid: false,
+				message: `Ya existe un tema en la posición ${newOrder}`
+			});
 		}
 	}
 
