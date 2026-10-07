@@ -84,7 +84,7 @@ The server will start at [http://localhost:3000](http://localhost:3000).
 
 ## Default Seed Data
 
-On startup the app seeds itself with demo data — no database setup needed. You can log in with any of the following accounts (all share the same password):
+On startup the app seeds itself with demo data — no database setup needed. You can log in with any of the following accounts (all share the same password). Demo credentials, for local testing only:
 
 | Name | Email | Role | Password |
 |---|---|---|---|
@@ -143,3 +143,10 @@ Ideas and pending tasks to improve the application:
 - Internationalization (i18n): support multiple languages for the interface and templates.
 - UX improvements: smooth animations for forms, richer frontend validations and clearer error messages.
 - Monitoring and deployment: add Dockerfiles, CI/CD pipelines and production monitoring.
+
+## Authors
+
+This project was developed as a pair-programming team during a web development internship at OpenVidu (May–June 2026). Both authors worked together on every part of the application: back-end, front-end and the OpenVidu integration.
+
+- [@dabediagal](https://github.com/dabediagal)
+- [@n3tw1tch](https://github.com/n3tw1tch) 
