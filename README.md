@@ -32,8 +32,8 @@ A web application for managing a virtual classroom environment. It allows an adm
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/dabediagal/proyecto-practicas.git
-   cd proyecto-practicas
+   git clone https://github.com/dabediagal/OpenClass.git
+   cd OpenClass
    ```
 
 2. **Install dependencies**
